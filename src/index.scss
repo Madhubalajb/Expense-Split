@@ -1,0 +1,43 @@
+body {
+    padding-top: 100px;
+    background-color: aliceblue;
+    .btn {
+        width: fit-content;
+    }
+    .badge {
+        padding: 5px;
+        background-color: blue;
+        color: white;
+    }
+    .split {
+        padding-top: 50px;
+        .card {
+            background-color: #7fff00;
+            padding: 10px 30px;
+            width: fit-content;
+            h4 {
+                padding: 10px;
+            }
+            .row {
+                input {
+                    margin-bottom: 15px;
+                    margin-right: 5px;
+                }
+                .btn {
+                    width: fit-content;
+                    height: fit-content;
+                }
+            }
+            .form-control {
+                border-color: #9E9E9E;
+            }
+        }
+        .split_btn {
+            margin: 30px;
+        }
+    }
+    .bottom {
+        padding-top: 6%;
+        vertical-align: text-bottom;
+    }
+}

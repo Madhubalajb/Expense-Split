@@ -8,15 +8,25 @@ const App = () => {
   const [expName, setExpName] = useState('')
   const [amt, setAmt] = useState('')
   const [members, setMembers] = useState([{name: null}])
+  const [by, setBy] = useState({})
+  const [to, setTo] = useState({})
 
   const handleExpName = (event) => setExpName(event.target.value)
 
   const handleAmount = (event) => setAmt(event.target.value)
 
+  const handleRadio = (event) => setBy(event.target.value)
+
   const handleMember = (event, index) => {
     const temp = [...members]
     temp[index].name = event.target.value
     setMembers(temp)
+  }
+
+  const handleCheckbox = (event) => {
+    const temp = [...members]
+    temp.push(event.target.value)
+    setTo(temp)
   }
 
   const addExpense = (event) => {
@@ -26,7 +36,9 @@ const App = () => {
       expense_name: expName,
       members: members,
       amount: amt,
-      count: members.length,
+      count: to.length,
+      by_whom: by,
+      to_whom: to
     }
     setExpenses(expenses.concat(expense))   
     setExpName('')
@@ -51,7 +63,7 @@ const App = () => {
     <center>
       <h2>Expense / Split</h2>
       <p><Badge>React</Badge > + <Badge>Express</Badge> + <Badge>MongoDB</Badge></p>
-      <ExpenseForm handleExpName={handleExpName} handleAmount={handleAmount} handleMember={handleMember} addExpense={addExpense} addMember={addMember} removeMember={removeMember} members={members}/>
+      <ExpenseForm ExpName={handleExpName} Amount={handleAmount} Member={handleMember} addExpense={addExpense} addMember={addMember} rmMember={removeMember} members={members} radio={handleRadio} checkbox={handleCheckbox} />
       <DisplayExpense />
       <p className="bottom">
         designed & developed by <a href="https://madhubalajb.github.io/" rel="noopener noreferrer" target="_blank">Madhubala Jayakumaran</a> <br/>

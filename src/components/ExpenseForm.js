@@ -4,12 +4,12 @@ import {Container, Row, Col, Card, Button, Form} from 'react-bootstrap'
 const ExpenseForm = (props) => {
  return (
     <Container className="split">
-        <Form >
+        <Form onSubmit={props.addExpense} >
             <Row>
                 <Col>
                     <Card>
                         <h4>1. Name your Expense</h4>
-                        <Form.Control onChange={props.handleExpName} placeholder="Expense Name" /> <br/>
+                        <Form.Control onChange={props.ExpName} placeholder="Expense Name" required/> <br/>
                     </Card>
                 </Col>
                 <Col>
@@ -19,8 +19,8 @@ const ExpenseForm = (props) => {
                             props.members.map((member,index) => {
                                 return (
                                     <Row key={index}>
-                                        <Form.Control className="col-sm-9" value={member.name || ""} placeholder="Person Name" onChange={(event) => props.handleMember(event, index)} />
-                                        <Button className="col-sm-2" variant="dark" onClick={() => props.removeMember(index)}><b>-</b></Button>
+                                        <Form.Control className="col-sm-9" value={member.name || ""} placeholder="Person Name" onChange={(event) => props.Member(event, index)} required/>
+                                        <Button className="col-sm-2" variant="dark" onClick={() => props.rmMember(index)}><b>-</b></Button>
                                     </Row>
                                 )
                             })
@@ -31,13 +31,13 @@ const ExpenseForm = (props) => {
                 <Col>
                     <Card>
                         <h4>3. Enter the Expense</h4>
-                        <Form.Control onChange={props.handleAmount} placeholder="Amount" />
+                        <Form.Control onChange={props.Amount} placeholder="Amount" required/>
                         By whom: 
                         {
                             props.members.map((member,index) => {
                                 return(
                                     <div key={index}>
-                                        <Form.Check inline type="radio" label={member.name}></Form.Check>
+                                        <Form.Check inline type="radio" value={member.name || ''} label={member.name} onChange={props.radio} required/>
                                     </div>
                                 )
                             })
@@ -47,7 +47,7 @@ const ExpenseForm = (props) => {
                             props.members.map((member,index) => {
                                 return(
                                     <div key={index}>
-                                        <Form.Check inline type="checkbox" label={member.name}></Form.Check>
+                                        <Form.Check inline type="checkbox" value={member.name || ''} label={member.name} onChange={props.checkbox} required/>
                                     </div>
                                 )
                             })
@@ -55,7 +55,8 @@ const ExpenseForm = (props) => {
                     </Card>
                 </Col>
             </Row>
-            <Button variant="dark" className="split_btn" onClick={props.addExpense} type="submit">Finally, Split It</Button>
+            <Button variant="dark" className="split_btn" type="submit">Finally, Split It</Button>
+            <Button variant="dark" type="reset">Reset</Button>
         </Form>
     </Container>
  )

@@ -7,10 +7,9 @@ const App = () => {
   const [expenses, setExpenses] = useState([])
   const [expName, setExpName] = useState('')
   const [amt, setAmt] = useState('')
-  const [members, setMembers] = useState([{name: null}])
-  const [by, setBy] = useState({})
-  const [to, setTo] = useState({})
-
+  const [members, setMembers] = useState([{name: null, isChecked: false}])
+  const [by, setBy] = useState('')
+  
   const handleExpName = (event) => setExpName(event.target.value)
 
   const handleAmount = (event) => setAmt(event.target.value)
@@ -23,10 +22,10 @@ const App = () => {
     setMembers(temp)
   }
 
-  const handleCheckbox = (event) => {
+  const handleCheckbox = (event, index) => {
     const temp = [...members]
-    temp.push(event.target.value)
-    setTo(temp)
+    temp[index].isChecked = !temp[index].isChecked
+    setMembers(temp)
   }
 
   const addExpense = (event) => {
@@ -36,9 +35,8 @@ const App = () => {
       expense_name: expName,
       members: members,
       amount: amt,
-      count: to.length,
-      by_whom: by,
-      to_whom: to
+      count: members.length,
+      by_whom: by
     }
     setExpenses(expenses.concat(expense))   
     setExpName('')
@@ -46,9 +44,9 @@ const App = () => {
     console.log(expenses)
   }
   
-  const addMember = (event) => {
+  const addMember = () => {
     const temp = [...members]
-    temp.push({name: null})
+    temp.push({name: null, isChecked: false})
     setMembers(temp)
   }
 
@@ -63,7 +61,7 @@ const App = () => {
     <center>
       <h2>Expense / Split</h2>
       <p><Badge>React</Badge > + <Badge>Express</Badge> + <Badge>MongoDB</Badge></p>
-      <ExpenseForm ExpName={handleExpName} Amount={handleAmount} Member={handleMember} addExpense={addExpense} addMember={addMember} rmMember={removeMember} members={members} radio={handleRadio} checkbox={handleCheckbox} />
+      <ExpenseForm ExpName={handleExpName} Amount={handleAmount} Member={handleMember} addExpense={addExpense} addMember={addMember} rmMember={removeMember} members={members} radio={handleRadio} checkbox={handleCheckbox}/>
       <DisplayExpense />
       <p className="bottom">
         designed & developed by <a href="https://madhubalajb.github.io/" rel="noopener noreferrer" target="_blank">Madhubala Jayakumaran</a> <br/>

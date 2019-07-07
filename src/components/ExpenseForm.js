@@ -37,7 +37,7 @@ const ExpenseForm = (props) => {
                             props.members.map((member,index) => {
                                 return(
                                     <div key={index}>
-                                        <Form.Check inline type="radio" value={member.name || ''} label={member.name} onChange={props.radio} required/>
+                                        <Form.Check inline type="radio" value={member.name || ''} label={member.name} onChange={props.radio}/>
                                     </div>
                                 )
                             })
@@ -47,7 +47,7 @@ const ExpenseForm = (props) => {
                             props.members.map((member,index) => {
                                 return(
                                     <div key={index}>
-                                        <Form.Check inline type="checkbox" value={member.name || ''} label={member.name} onChange={props.checkbox} required/>
+                                        <Form.Check inline type="checkbox" value={member.name || ''} label={member.name} checked={member.isChecked} onChange={(event) => props.checkbox(event,index)}/>
                                     </div>
                                 )
                             })
@@ -56,7 +56,6 @@ const ExpenseForm = (props) => {
                 </Col>
             </Row>
             <Button variant="dark" className="split_btn" type="submit">Finally, Split It</Button>
-            <Button variant="dark" type="reset">Reset</Button>
         </Form>
     </Container>
  )

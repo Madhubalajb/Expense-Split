@@ -7,6 +7,9 @@
 - SASS
 - Bootstrap
 - React JS
+- Node JS
+- Express
+- MongoDB
 
 ## Dependencies
 1. [Node Js](https://nodejs.org/en/download/)

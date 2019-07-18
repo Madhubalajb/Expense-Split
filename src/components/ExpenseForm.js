@@ -9,9 +9,11 @@ const ExpenseForm = (props) => {
                 <Col>
                     <Card>
                         <h4>1. Name your Expense</h4>
-                        <Form.Control onChange={props.ExpName} placeholder="Expense Name" required/> <br/>
+                        <Form.Control onChange={props.ExpName} placeholder="Expense Name"/>
+                        <Form.Control onChange={props.date} type="date" placeholder="Date"/>
                     </Card>
                 </Col>
+
                 <Col>
                     <Card>
                         <h4>2. Add your group</h4>
@@ -19,7 +21,7 @@ const ExpenseForm = (props) => {
                             props.members.map((member,index) => {
                                 return (
                                     <Row key={index}>
-                                        <Form.Control className="col-sm-9" value={member.name || ""} placeholder="Person Name" onChange={(event) => props.Member(event, index)} required/>
+                                        <Form.Control className="col-sm-9" value={member.name || ""} placeholder="Person Name" onChange={(event) => props.Member(event, index)}/>
                                         <Button className="col-sm-2" variant="dark" onClick={() => props.rmMember(index)}><b>-</b></Button>
                                     </Row>
                                 )
@@ -28,17 +30,16 @@ const ExpenseForm = (props) => {
                         <Button variant="dark" title="add more" onClick={(event) => props.addMember(event)}><b>+</b></Button>
                     </Card>
                 </Col>
+
                 <Col>
                     <Card>
                         <h4>3. Enter the Expense</h4>
-                        <Form.Control onChange={props.Amount} placeholder="Amount" required/>
+                        <Form.Control onChange={props.Amount} placeholder="Amount"/>
                         By whom: 
                         {
                             props.members.map((member,index) => {
                                 return(
-                                    <div key={index}>
-                                        <Form.Check inline type="radio" value={member.name || ''} label={member.name} onChange={props.radio}/>
-                                    </div>
+                                    <Form.Check key={index} type="radio" value={member.name || ''} label={member.name} onChange={props.radio}/>
                                 )
                             })
                         }
@@ -47,7 +48,7 @@ const ExpenseForm = (props) => {
                             props.members.map((member,index) => {
                                 return(
                                     <div key={index}>
-                                        <Form.Check inline type="checkbox" value={member.name || ''} label={member.name} checked={member.isChecked} onChange={(event) => props.checkbox(event,index)}/>
+                                        <Form.Check type="checkbox" value={member.name || ''} label={member.name} checked={member.isChecked} onChange={(event) => props.checkbox(event,index)}/>
                                     </div>
                                 )
                             })

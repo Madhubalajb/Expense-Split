@@ -3,10 +3,12 @@
 > A React based web application for splitting expenses spent (**WIP**)
 
 ## Tech Stack
+**Front End**
 - HTML
 - SASS
 - Bootstrap
 - React JS
+**Back End**
 - Node JS
 - Express
 - MongoDB

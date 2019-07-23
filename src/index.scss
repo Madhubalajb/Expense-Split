@@ -18,21 +18,13 @@ body {
             h4 {
                 padding: 10px;
             }
-            .radio {
-                display: flex;
-            }
-            .row {
-                input {
-                    margin-bottom: 15px;
-                    margin-right: 5px;
-                }
-                .btn {
-                    width: fit-content;
-                    height: fit-content;
-                }
-            }
             .form-control {
                 border-color: #9E9E9E;
+                margin: 5px;
+            }
+            .minusBtn {
+                height: fit-content;
+                margin-top: 5px;
             }
         }
         .split_btn {

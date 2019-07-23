@@ -5,24 +5,7 @@ import DisplayExpense from './components/DisplayExpense'
 import ExpenseModal from './components/ExpenseModal'
 
 const App = () => {
-  let dummy = {
-    id: 1,
-    expense_name: "Trip",
-    date: "2019-07-04",
-    members: [
-      {
-        name: "Madhu",
-        isChecked: "true"
-      },
-      {
-        name: "Bala",
-        isChecked: "true"
-      }
-    ],
-    amount: Number("1000"),
-    by_whom: "Madhu"
-  }
-  const [expenses, setExpenses] = useState([dummy])
+  const [expenses, setExpenses] = useState([])
   const [expName, setExpName] = useState('')
   const [date, setDate] = useState('')
   const [amt, setAmt] = useState('')
@@ -40,6 +23,18 @@ const App = () => {
   const handleMember = (event, index) => {
     const temp = [...members]
     temp[index].name = event.target.value
+    setMembers(temp)
+  }
+ 
+  const addMember = () => {
+    const temp = [...members]
+    temp.push({name: null, isChecked: false})
+    setMembers(temp)
+  }
+
+  const removeMember = (index) => {
+    const temp = [...members]
+    temp.splice(index, 1)
     setMembers(temp)
   }
 
@@ -60,24 +55,10 @@ const App = () => {
       count: members.length,
       by_whom: by
     }
-    setExpenses(expenses.concat(expense))   
+    setExpenses(expenses.concat(expense))  
+    console.log(expenses) 
     setExpName('')
     setAmt('')
-    console.log(expenses[0].expense_name)
-    console.log(expenses[0])
-    //console.log(`Name: ${expenses[0].expense_name}, Date: ${expenses[0].date}, Amount: ${expenses[0].amount}, By whom: ${expenses[0].by_whom}`)
-  }
-  
-  const addMember = () => {
-    const temp = [...members]
-    temp.push({name: null, isChecked: false})
-    setMembers(temp)
-  }
-
-  const removeMember = (index) => {
-    const temp = [...members]
-    temp.splice(index, 1)
-    setMembers(temp)
   }
 
   return (

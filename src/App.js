@@ -69,7 +69,7 @@ const App = () => {
       <DisplayExpense />
       <ExpenseModal dummy={expenses[0]} />
       <p className="bottom">
-        designed & developed by <a href="https://madhubalajb.github.io/" rel="noopener noreferrer" target="_blank">Madhubala Jayakumaran</a> <br/>
+        designed & developed by <a href="https://madhubalajb.github.io/" rel="noopener noreferrer" target="_blank">madhubala jayakumaran</a> <br/>
         On live since July 2019
       </p>
     </center>

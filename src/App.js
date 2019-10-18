@@ -3,6 +3,7 @@ import {Badge} from 'react-bootstrap'
 import ExpenseForm from './components/ExpenseForm'
 import DisplayExpense from './components/DisplayExpense'
 import ExpenseModal from './components/ExpenseModal'
+import expenseServices from './services/expense-split'
 
 const App = () => {
   const [expenses, setExpenses] = useState([])
@@ -52,13 +53,15 @@ const App = () => {
       date: date,
       members: members,
       amount: Number(amt),
-      count: members.length,
       by_whom: by
     }
-    setExpenses(expenses.concat(expense))  
-    console.log(expenses) 
-    setExpName('')
-    setAmt('')
+    expenseServices
+      .addData(expense)
+      .then(returnedExpense => {
+        setExpenses(expenses.concat(returnedExpense)) 
+        setExpName('')
+        setAmt('')
+      })
   }
 
   return (

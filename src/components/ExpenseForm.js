@@ -22,12 +22,12 @@ const ExpenseForm = (props) => {
                                 return (
                                     <Row key={index}>
                                         <Form.Control className="col-sm-9" value={member.name || ""} placeholder="Person Name" onChange={(event) => props.Member(event, index)} required/>
-                                        <Button className="col-sm-2 minusBtn" variant="dark" onClick={() => props.rmMember(index)}><b>-</b></Button>
+                                        <Button className="col-sm-2 minusBtn" variant="dark" title="delete member" onClick={() => props.rmMember(index)}><b>-</b></Button>
                                     </Row>
                                 )
                             })
                         }
-                        <Button variant="dark" title="add more" onClick={(event) => props.addMember(event)}><b>+</b></Button>
+                        <Button variant="dark" title="add member" onClick={(event) => props.addMember(event)}><b>+</b></Button>
                     </Card>
                 </Col>
 
@@ -63,7 +63,7 @@ const ExpenseForm = (props) => {
                     </Card>
                 </Col>
             </Row>
-            <Button variant="dark" className="split_btn" type="submit">Finally, Split It</Button>
+            <Button variant="dark" title="Split" className="split_btn" type="submit">Finally, Split It</Button>
         </Form>
     </Container>
  )

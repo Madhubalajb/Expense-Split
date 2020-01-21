@@ -6,12 +6,12 @@ const getData = () => {
     return request.then(response => response.data)
 }
 
-const addData = (expense) => {
+const addData = expense => {
     const request = axios.post(url, expense)
     return request.then(response => response.data)
 }
 
-const deleteData = (expense_id) => {
+const deleteData = expense_id => {
     const request = axios.delete(`${url}/${expense_id}`)
     return request.then(response => response.data)
 }

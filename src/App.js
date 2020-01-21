@@ -60,7 +60,10 @@ const App = () => {
       .then(returnedExpense => {
         setExpenses(expenses.concat(returnedExpense)) 
         setExpName('')
+        setDate('')
         setAmt('')
+        setMembers([])
+        setBy('')
       })
   }
 

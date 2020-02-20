@@ -4,7 +4,7 @@ import { Modal } from 'react-bootstrap'
 const ExpenseModal = (props) => {
     return (
         <Modal>
-            <Modal.Header>props.expense_name</Modal.Header>
+            <Modal.Header>{props.expense_name}</Modal.Header>
             <Modal.Body>
                 Date: {props.date}
                 Amount spent: {props.amount}

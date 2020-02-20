@@ -1,6 +1,10 @@
 body {
     padding-top: 100px;
     background-color: aliceblue;
+    .login-btns {
+        float: right;
+        padding-right: 15px;
+    }
     .btn {
         width: fit-content;
     }

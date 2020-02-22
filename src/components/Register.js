@@ -1,15 +1,15 @@
 import React from 'react'
-import {Modal, Button, Form} from 'react-bootstrap'
+import {Modal, Form, Button} from 'react-bootstrap'
 
 const Register = (props) => {
     return (
         <Modal show={props.show} onHide={props.Close}>
-            <Modal.Header closeButton>Register</Modal.Header>
+            <Modal.Header closeButton><b>Sign Up</b></Modal.Header>
             <Modal.Body>
                 <Form>
                     <Form.Control placeholder="Name" required />
                     <Form.Control placeholder="Username" required />
-                    <Form.control placeholder="Password" required />
+                    <Form.Control placeholder="Password" required />
                     <Button type="submit">Sign Up</Button>
                 </Form>
             </Modal.Body>

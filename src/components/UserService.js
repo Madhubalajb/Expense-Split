@@ -12,6 +12,15 @@ const UserService = () => {
     const handleRegModal = () => setRegModal(true)
     const handleRegNoModal = () => setRegModal(false)
 
+    const [name, setName] = useState('')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+
+    const handleName = (event) => setName(event.target.value)
+    const handleUsername = (event) => setUsername(event.target.value)
+    const handlePassword = (event) => setPassword(event.target.value)
+
+
     return (
         <div>
             <Button onClick={handleLoginModal}>log In</Button>

@@ -4,7 +4,7 @@ import {Modal, Form, Button} from 'react-bootstrap'
 const Login = (props) => {
     return (
         <Modal show={props.show} onHide={props.Close}>
-            <Modal.Header closeButton>Log In</Modal.Header>
+            <Modal.Header closeButton><b>Log In</b></Modal.Header>
             <Modal.Body>
                 <Form>
                     <Form.Control placeholder="Username" required />

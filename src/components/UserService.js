@@ -1,17 +1,24 @@
 import React, {useState} from 'react'
 import {Button} from 'react-bootstrap'
-import Login from './Login'
-import Register from './Register'
+import LoginModal from './Login'
+import RegisterModal from './Register'
 
 const UserService = () => {
     const [loginModal, setLoginModal] = useState(false)
-    const handleModal = () => setLoginModal(true)
-    const handleNoModal = () => setLoginModal(false)
+    const handleLoginModal = () => setLoginModal(true)
+    const handleLoginNoModal = () => setLoginModal(false)
+
+    const [regModal, setRegMOdal] = useState(false)
+    const handleRegModal = () => setRegMOdal(true)
+    const handleRegNoModal = () => setRegMOdal(false)
 
     return (
         <div>
-            <Button>log In</Button>
-            <Button>Sign Up</Button>
+            <Button onClick={handleLoginModal}>log In</Button>
+            <LoginModal show={loginModal} Close={handleLoginNoModal}/>
+
+            <Button onClick={handleRegModal}>Sign Up</Button>
+            <RegisterModal show={regModal} Close={handleRegNoModal}/>
         </div>
     )
 }

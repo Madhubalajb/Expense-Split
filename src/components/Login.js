@@ -1,10 +1,10 @@
 import React from 'react'
 import {Modal, Form, Button, } from 'react-bootstrap'
 
-const Login = () => {
+const Login = (props) => {
     return (
-        <Modal>
-            <Modal.Header>Log In</Modal.Header>
+        <Modal show={props.show} onHide={props.Close}>
+            <Modal.Header closeButton>Log In</Modal.Header>
             <Modal.Body>
                 <Form>
                     <Form.Control placeholder="Username" required />

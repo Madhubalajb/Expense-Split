@@ -3,8 +3,8 @@ import {Modal, Button, Form} from 'react-bootstrap'
 
 const Register = () => {
     return (
-        <Modal>
-            <Modal.Header>Register</Modal.Header>
+        <Modal show={props.show} onHide={props.Close}>
+            <Modal.Header closeButton>Register</Modal.Header>
             <Modal.Body>
                 <Form>
                     <Form.Control placeholder="Name" required />
@@ -17,4 +17,4 @@ const Register = () => {
     )
 }
 
-export default Register;
+export default Register

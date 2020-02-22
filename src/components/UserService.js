@@ -8,9 +8,9 @@ const UserService = () => {
     const handleLoginModal = () => setLoginModal(true)
     const handleLoginNoModal = () => setLoginModal(false)
 
-    const [regModal, setRegMOdal] = useState(false)
-    const handleRegModal = () => setRegMOdal(true)
-    const handleRegNoModal = () => setRegMOdal(false)
+    const [regModal, setRegModal] = useState(false)
+    const handleRegModal = () => setRegModal(true)
+    const handleRegNoModal = () => setRegModal(false)
 
     return (
         <div>

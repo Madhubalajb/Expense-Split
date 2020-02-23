@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Button} from 'react-bootstrap'
 import LoginModal from './Login'
-import SignupModal from './Register'
+import SignupModal from './Signup'
 
 const UserService = () => {
     const [loginModal, setLoginModal] = useState(false)

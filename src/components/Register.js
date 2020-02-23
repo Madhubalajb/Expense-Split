@@ -1,15 +1,15 @@
 import React from 'react'
 import {Modal, Form, Button} from 'react-bootstrap'
 
-const Register = (props) => {
+const Signup = (props) => {
     return (
         <Modal show={props.show} onHide={props.Close}>
             <Modal.Header closeButton><b>Sign Up</b></Modal.Header>
             <Modal.Body>
-                <Form>
-                    <Form.Control placeholder="Name" required />
-                    <Form.Control placeholder="Username" required />
-                    <Form.Control placeholder="Password" required />
+                <Form onSubmit={}>
+                    <Form.Control placeholder="Name" onChange={name} required />
+                    <Form.Control placeholder="Username" onChange={username} required />
+                    <Form.Control placeholder="Password" onChnage={pwd} required />
                     <Button type="submit">Sign Up</Button>
                 </Form>
             </Modal.Body>
@@ -17,4 +17,4 @@ const Register = (props) => {
     )
 }
 
-export default Register
+export default Signup

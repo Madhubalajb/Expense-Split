@@ -1,24 +1,24 @@
-import axios from 'axios';
+import axios from 'axios'
 const url = '/api/expenses'
 
-const getData = () => {
-    const request = axios.get(url)
-    return request.then(response => response.data)
+const getData = async () => {
+    const response = await axios.get(url)
+    return response.data
 }
 
-const addData = expense => {
-    const request = axios.post(url, expense)
-    return request.then(response => response.data)
+const addData = async (expense)=> {
+    const response = await axios.post(url, expense)
+    return response.data
 }
 
-const deleteData = expense_id => {
-    const request = axios.delete(`${url}/${expense_id}`)
-    return request.then(response => response.data)
+const deleteData = async (expense_id) => {
+    const response = await axios.delete(`${url}/${expense_id}`)
+    return response.data
 }
 
-const updateData = (expense_id, expense) => {
-    const request = axios.put(`${url}/${expense_id}`, expense)
-    return request.then(response => response.data)
+const updateData = async (expense_id, expense) => {
+    const response = await axios.put(`${url}/${expense_id}`, expense)
+    return response.data
 }
 
 export default { getData, addData, deleteData, updateData }

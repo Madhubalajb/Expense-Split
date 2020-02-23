@@ -6,9 +6,9 @@ const Login = (props) => {
         <Modal show={props.show} onHide={props.Close}>
             <Modal.Header closeButton><b>Log In</b></Modal.Header>
             <Modal.Body>
-                <Form>
-                    <Form.Control placeholder="Username" required />
-                    <Form.Control placeholder="Password" required />
+                <Form onSubmit={}>
+                    <Form.Control placeholder="Username" onChange={username} required />
+                    <Form.Control placeholder="Password" onChange={pwd} required />
                     <Button type="submit">Log In</Button>
                 </Form>
             </Modal.Body>

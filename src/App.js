@@ -4,7 +4,7 @@ import ExpenseForm from './components/ExpenseForm'
 import DisplayExpense from './components/DisplayExpense'
 import ExpenseModal from './components/ExpenseModal'
 import UserService from './components/UserService'
-import expenseServices from './services/expense-split'
+import expenseService from './services/expense-split'
 
 const App = () => {
   const [expenses, setExpenses] = useState([])
@@ -56,7 +56,7 @@ const App = () => {
       amount: Number(amt),
       by_whom: by
     }
-    expenseServices
+    expenseService
       .addData(expense)
       .then(returnedExpense => {
         setExpenses(expenses.concat(returnedExpense)) 

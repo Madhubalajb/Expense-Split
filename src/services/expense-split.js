@@ -1,13 +1,22 @@
 import axios from 'axios'
 const url = '/api/expenses'
 
+let token = null
+
+const setToken = newToken => {
+    token = `bearer ${newToken}`
+}
+
 const getData = async () => {
     const response = await axios.get(url)
     return response.data
 }
 
 const addData = async (expense)=> {
-    const response = await axios.post(url, expense)
+    const config = {
+        headers: { Authorization : token }
+    }
+    const response = await axios.post(url, expense, config)
     return response.data
 }
 
@@ -21,4 +30,4 @@ const updateData = async (expense_id, expense) => {
     return response.data
 }
 
-export default { getData, addData, deleteData, updateData }
+export default { setToken, getData, addData, deleteData, updateData }

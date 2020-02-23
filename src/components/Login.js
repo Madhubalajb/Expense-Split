@@ -7,8 +7,8 @@ const Login = (props) => {
             <Modal.Header closeButton><b>Log In</b></Modal.Header>
             <Modal.Body>
                 <Form onSubmit={props.login}>
-                    <Form.Control placeholder="Username" onChange={username} required />
-                    <Form.Control placeholder="Password" onChange={pwd} required />
+                    <Form.Control placeholder="Username" onChange={props.username} required />
+                    <Form.Control placeholder="Password" onChange={props.pwd} required />
                     <Button type="submit">Log In</Button>
                 </Form>
             </Modal.Body>

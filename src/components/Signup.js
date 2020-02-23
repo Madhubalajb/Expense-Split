@@ -6,7 +6,7 @@ const Signup = (props) => {
         <Modal show={props.show} onHide={props.Close}>
             <Modal.Header closeButton><b>Sign Up</b></Modal.Header>
             <Modal.Body>
-                <Form onSubmit={}>
+                <Form onSubmit={props.signup}>
                     <Form.Control placeholder="Name" onChange={name} required />
                     <Form.Control placeholder="Username" onChange={username} required />
                     <Form.Control placeholder="Password" onChnage={pwd} required />

@@ -54,7 +54,7 @@ const ExpenseForm = (props) => {
                             props.members.map((member,index) => {
                                 return(
                                     <div key={index}>
-                                        <Col><Form.Check type="checkbox" value={member.name || ''} label={member.name} checked={member.isChecked} onChange={(event) => props.checkbox(event,index)}/></Col>
+                                        <Col><Form.Check type="checkbox" value={member.name || ''} label={member.name} checked={member.isChecked} onChange={() => props.checkbox(index)}/></Col>
                                     </div>
                                 )
                             })

@@ -35,6 +35,7 @@ const UserService = () => {
             setUser(user)
             setUsername('')
             setPassword('')
+            handleLoginNoModal()
         } 
         catch (exception){
             console.log(exception)
@@ -50,6 +51,7 @@ const UserService = () => {
             setUser('')
             setUsername('')
             setPassword('')
+            handleSignupNoModal()
         }
         catch (exception) {
             console.log(exception)

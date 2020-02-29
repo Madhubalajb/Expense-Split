@@ -3,7 +3,7 @@ import {Modal, Form, Button} from 'react-bootstrap'
 
 const Signup = (props) => {
     return (
-        <Modal show={props.show} onHide={props.Close}>
+        <Modal id="signupModal" show={props.show} onHide={props.Close}>
             <Modal.Header closeButton><b>Sign Up</b></Modal.Header>
             <Modal.Body>
                 <Form onSubmit={props.signup}>

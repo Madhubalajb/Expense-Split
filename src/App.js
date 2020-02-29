@@ -77,7 +77,8 @@ const App = () => {
       <center>
         <h2>Expense / Split</h2>
         <p><Badge>React JS</Badge > + <Badge>REST API</Badge> + <Badge>Node JS</Badge> + <Badge>Express</Badge> + <Badge>MongoDB</Badge></p>
-        <ExpenseForm ExpName={handleExpName} date={handleDate} Amount={handleAmount} Member={handleMember} addExpense={addExpense} addMember={addMember} rmMember={removeMember} members={members} radio={handleRadio} checkbox={handleCheckbox}/>
+        <ExpenseForm ExpName={handleExpName} date={handleDate} Amount={handleAmount} Member={handleMember} addExpense={addExpense} addMember={addMember} 
+            rmMember={removeMember} members={members} expenseName={expName} date={date} amount={amt} radio={handleRadio} checkbox={handleCheckbox}/>
         <DisplayExpense />
         <ExpenseModal dummy={expenses[0]} />
         <p className="bottom">

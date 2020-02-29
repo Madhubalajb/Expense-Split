@@ -9,8 +9,8 @@ const ExpenseForm = (props) => {
                 <Col>
                     <Card>
                         <h4>1. Name your Expense</h4>
-                        <Form.Control onChange={props.ExpName} placeholder="Expense Name" required/>
-                        <Form.Control onChange={props.date} type="date" placeholder="Date" required/>
+                        <Form.Control onChange={props.ExpName} value={props.expenseName} placeholder="Expense Name" required/>
+                        <Form.Control onChange={props.date} value={props.date} type="date" placeholder="Date" required/>
                     </Card>
                 </Col>
 
@@ -34,7 +34,7 @@ const ExpenseForm = (props) => {
                 <Col>
                     <Card>
                         <h4>3. Enter the Expense</h4>
-                        <Form.Control onChange={props.Amount} placeholder="Amount" required/>
+                        <Form.Control onChange={props.Amount} value={props.amount} placeholder="Amount" required/>
                         <Row><b>By whom:</b></Row> 
                         <Row>
                         {

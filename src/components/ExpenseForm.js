@@ -10,7 +10,7 @@ const ExpenseForm = (props) => {
                     <Card>
                         <h4>1. Name your Expense</h4>
                         <Form.Control onChange={props.ExpName} value={props.expenseName || ""} placeholder="Expense Name" required/>
-                        <Form.Control onChange={props.date || ""} value={props.date} type="date" placeholder="Date" required/>
+                        <Form.Control onChange={props.date} value={props.dateValue} type="date" placeholder="Date" required/>
                     </Card>
                 </Col>
 

@@ -16,7 +16,7 @@ const ExpenseForm = (props) => {
 
                 <Col>
                     <Card>
-                        <h4>2) Add your group</h4>
+                        <h4>2) Add your Group</h4>
                         {
                             props.members.map((member,index) => {
                                 return (

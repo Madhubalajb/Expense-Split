@@ -1,9 +1,11 @@
 $Blue-Grotto: #60A3D9;
 $Navy-Blue: #003B73;
+$light-grey: #e0e0e0;
 body {
-    padding-top: 100px;
+    padding-top: 125px;
     .navbar {
-        padding: 20px;
+        padding: 15px;
+        border-bottom: 1px solid $light-grey; 
     }
     .navbar-light {
         .navbar-brand {
@@ -27,13 +29,14 @@ body {
         width: fit-content;
     }
     .badge {
-        padding: 10px;
+        padding: 8px;
         background-color: $Navy-Blue;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         color: white;
+        letter-spacing: 1px;
     }
     .split {
-        padding-top: 70px;
+        padding-top: 80px;
         .card {
             background-color: $Blue-Grotto;
             padding: 10px 30px;
@@ -58,11 +61,18 @@ body {
         }
         .split_btn {
             margin: 30px;
+            letter-spacing: 1px;
             background-color: $Navy-Blue;
         }
     }
     .bottom {
-        padding-top: 10%;
+        padding-top: 8%;
         vertical-align: text-bottom;
+    }
+    .loginInputs , .signupInputs {
+        .form-control {
+            margin-bottom: 10px;
+            border-color: $Blue-Grotto;
+        }
     }
 }

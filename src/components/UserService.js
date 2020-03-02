@@ -87,8 +87,8 @@ const UserService = () => {
     else {
         return (
             <div>
-                <Nav.Link>{user.username}</Nav.Link>
-                <Nav.Link onClick={logout}>Logout</Nav.Link>
+                <Nav.Link><b>{user.username}</b></Nav.Link>
+                <Nav.Link onClick={logout}><b>Logout</b></Nav.Link>
             </div>
         )
     }

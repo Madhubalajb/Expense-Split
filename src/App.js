@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {Badge} from 'react-bootstrap'
+import Navigation from './components/Navigation'
 import ExpenseForm from './components/ExpenseForm'
 import DisplayExpense from './components/DisplayExpense'
 import ExpenseModal from './components/ExpenseModal'
-import UserService from './components/UserService'
 import expenseService from './services/expense-split'
 
 const App = () => {
@@ -70,21 +70,16 @@ const App = () => {
 
   return (
     <div>
-      <div className="login-btns"> 
-        <UserService />
-      </div>
-      
+      <Navigation />
       <center>
-        <h2>Expense / Split</h2>
-        <p><Badge>React JS</Badge > + <Badge>REST API</Badge> + <Badge>Node JS</Badge> + <Badge>Express</Badge> + <Badge>MongoDB</Badge></p>
+        <p><Badge>React JS</Badge > <b>+</b> <Badge>REST API</Badge> <b>+</b> <Badge>Node JS</Badge> <b>+</b> <Badge>Express</Badge> <b>+</b> <Badge>MongoDB</Badge></p>
         <ExpenseForm ExpName={handleExpName} date={handleDate} Amount={handleAmount} Member={handleMember} addExpense={addExpense} addMember={addMember} 
             rmMember={removeMember} members={members} expenseName={expName} dateValue={date} amount={amt} radio={handleRadio} checkbox={handleCheckbox}/>
         <DisplayExpense />
         <ExpenseModal dummy={expenses[0]} />
-        <p className="bottom">
+        <footer className="bottom">
           designed & developed by <a href="https://madhubalajb.github.io/" rel="noopener noreferrer" target="_blank">madhubala jayakumaran</a> <br/>
-          On live since July 2019
-        </p>
+        </footer>
       </center>
     </div>
   )

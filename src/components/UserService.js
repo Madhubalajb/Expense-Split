@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Button} from 'react-bootstrap'
+import {Nav} from 'react-bootstrap'
 import LoginModal from './Login'
 import SignupModal from './Signup'
 import loginService from '../services/login'
@@ -60,10 +60,10 @@ const UserService = () => {
 
     return (
         <div>
-            <Button onClick={handleLoginModal}>log In</Button>
+            <Nav.Link onClick={handleLoginModal}><b>log <span className="foo">In</span></b></Nav.Link>
             <LoginModal show={loginModal} Close={handleLoginNoModal} username={handleUsername} pwd={handlePassword} login={handleLogin}/>
 
-            <Button onClick={handleSignupModal}>Sign Up</Button>
+            <Nav.Link onClick={handleSignupModal}><b>Sign <span className="foo">Up</span></b></Nav.Link>
             <SignupModal show={signupModal} Close={handleSignupNoModal} name={handleName} username={handleUsername} pwd={handlePassword} signup={handleSignup}/>
         </div>
     )

@@ -1,42 +1,68 @@
+$Blue-Grotto: #60A3D9;
+$Navy-Blue: #003B73;
 body {
     padding-top: 100px;
-    background-color: aliceblue;
-    .login-btns {
-        float: right;
-        padding-right: 15px;
+    .navbar {
+        padding: 20px;
+    }
+    .navbar-light {
+        .navbar-brand {
+            color: $Navy-Blue;
+            .slash {
+                color: $Blue-Grotto;
+            }
+        }
+        .navbar-nav {
+            .nav-link {
+                display: inline;
+                cursor: pointer;
+                color: $Blue-Grotto;
+                .foo {
+                    color: $Navy-Blue;
+                }
+            }
+        }
     }
     .btn {
         width: fit-content;
     }
     .badge {
-        padding: 5px;
-        background-color: blue;
+        padding: 10px;
+        background-color: $Navy-Blue;
+        font-size: 0.9rem;
         color: white;
     }
     .split {
-        padding-top: 50px;
+        padding-top: 70px;
         .card {
-            background-color: #7fff00;
+            background-color: $Blue-Grotto;
             padding: 10px 30px;
             width: fit-content;
+            color: white;
             h4 {
                 padding: 10px;
+                color: $Navy-Blue;
             }
             .form-control {
-                border-color: #9E9E9E;
+                border-color: black;
                 margin: 5px;
             }
             .minusBtn {
                 height: fit-content;
                 margin-top: 5px;
+                background-color: $Navy-Blue;
+            }
+            .addBtn {
+                background-color: $Navy-Blue;
             }
         }
         .split_btn {
             margin: 30px;
+            background-color: $Navy-Blue;
         }
     }
     .bottom {
-        padding-top: 6%;
+        padding-top: 10%;
         vertical-align: text-bottom;
     }
 }

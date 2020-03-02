@@ -8,7 +8,7 @@ const ExpenseForm = (props) => {
             <Row>
                 <Col>
                     <Card>
-                        <h4>1. Name your Expense</h4>
+                        <h4>1) Name your Expense</h4>
                         <Form.Control onChange={props.ExpName} value={props.expenseName || ""} placeholder="Expense Name" required/>
                         <Form.Control onChange={props.date} value={props.dateValue} type="date" placeholder="Date" required/>
                     </Card>
@@ -16,7 +16,7 @@ const ExpenseForm = (props) => {
 
                 <Col>
                     <Card>
-                        <h4>2. Add your group</h4>
+                        <h4>2) Add your group</h4>
                         {
                             props.members.map((member,index) => {
                                 return (
@@ -27,13 +27,13 @@ const ExpenseForm = (props) => {
                                 )
                             })
                         }
-                        <Button variant="dark" title="add member" onClick={(event) => props.addMember(event)}><b>+</b></Button>
+                        <Button className="addBtn" variant="dark" title="add member" onClick={(event) => props.addMember(event)}><b>+</b></Button>
                     </Card>
                 </Col>
 
                 <Col>
                     <Card>
-                        <h4>3. Enter the Expense</h4>
+                        <h4>3) Enter the Expenses</h4>
                         <Form.Control onChange={props.Amount} value={props.amount || ""} placeholder="Amount" required/>
                         <Row><b>By whom:</b></Row> 
                         <Row>

@@ -67,15 +67,30 @@ const UserService = () => {
         }
     }
 
-    return (
-        <div>
-            <Nav.Link onClick={handleLoginModal}><b>log <span className="foo">In</span></b></Nav.Link>
-            <LoginModal show={loginModal} Close={handleLoginNoModal} username={handleUsername} pwd={handlePassword} login={handleLogin}/>
+    const logout = () => {
+        setUser('')
+        window.localStorage.removeItem('logged-Expense-Split-User')
+        expenseService.setToken('')
+    }
 
-            <Nav.Link onClick={handleSignupModal}><b>Sign <span className="foo">Up</span></b></Nav.Link>
-            <SignupModal show={signupModal} Close={handleSignupNoModal} name={handleName} username={handleUsername} pwd={handlePassword} signup={handleSignup}/>
-        </div>
-    )
+    if(user == '') {
+        return (
+            <div>
+                <Nav.Link onClick={handleLoginModal}><b>log <span className="foo">In</span></b></Nav.Link>
+                <LoginModal show={loginModal} Close={handleLoginNoModal} username={handleUsername} pwd={handlePassword} login={handleLogin}/>
+    
+                <Nav.Link onClick={handleSignupModal}><b>Sign <span className="foo">Up</span></b></Nav.Link>
+                <SignupModal show={signupModal} Close={handleSignupNoModal} name={handleName} username={handleUsername} pwd={handlePassword} signup={handleSignup}/>              
+            </div>
+        )
+    }
+    else {
+        return (
+            <div>
+                <Nav.Link onClick={logout}>Logout</Nav.Link>
+            </div>
+        )
+    }
 }
 
 export default UserService

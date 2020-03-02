@@ -73,7 +73,7 @@ const UserService = () => {
         expenseService.setToken('')
     }
 
-    if(user == '') {
+    if(user === '') {
         return (
             <div>
                 <Nav.Link onClick={handleLoginModal}><b>log <span className="foo">In</span></b></Nav.Link>
@@ -87,6 +87,7 @@ const UserService = () => {
     else {
         return (
             <div>
+                <Nav.Link>{user.username}</Nav.Link>
                 <Nav.Link onClick={logout}>Logout</Nav.Link>
             </div>
         )

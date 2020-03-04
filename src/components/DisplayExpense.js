@@ -11,7 +11,6 @@ const DisplayExpense = () => {
 
     const showExpense = (expenses) => {
         expenses.map(expense => {
-            return (
                 <Card>
                     <h3>{expense.expense_name}</h3>
                     <p>{expense.amount}</p>
@@ -19,7 +18,6 @@ const DisplayExpense = () => {
                     <p>{expense.by_whom}</p>
                     <p>{expense.members[0].name}</p>
                 </Card>
-            )
         })
     }
     

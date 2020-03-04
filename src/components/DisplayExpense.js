@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {card} from 'react-bootstrap'
+import {Card} from 'react-bootstrap'
 import expenseService from '../services/expense-split'
 
 const DisplayExpense = (props) => {

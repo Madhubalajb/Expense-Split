@@ -76,7 +76,7 @@ const App = () => {
         <ExpenseForm ExpName={handleExpName} date={handleDate} Amount={handleAmount} Member={handleMember} addExpense={addExpense} addMember={addMember} 
             rmMember={removeMember} members={members} expenseName={expName} dateValue={date} amount={amt} radio={handleRadio} checkbox={handleCheckbox}/>
         <DisplayExpense />
-        <ExpenseModal/>
+        
         <footer className="bottom">
           designed & developed by <a href="https://madhubalajb.github.io/" rel="noopener noreferrer" target="_blank">madhubala jayakumaran</a> <br/>
         </footer>

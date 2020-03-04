@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {Card} from 'react-bootstrap'
 import expenseService from '../services/expense-split'
 
-const DisplayExpense = (props) => {
+const DisplayExpense = () => {
     const [expenses, setExpenses] = useState([])
 
     useEffect(() => {

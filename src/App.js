@@ -5,7 +5,7 @@ import Navigation from './components/Navigation'
 import ExpenseForm from './components/ExpenseForm'
 import ExpenseModal from './components/ExpenseModal'
 import expenseService from './services/expense-split'
-import DisplayExpense from '../components/DisplayExpense'
+import DisplayExpense from './components/DisplayExpense'
 
 const App = () => {
   const [expense, setExpense] = useState([])

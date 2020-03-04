@@ -9,21 +9,19 @@ const DisplayExpense = () => {
         expenseService.getData().then(expenses => setExpenses(expenses))
     }, [])
 
-    const showExpense = (expenses) => {
-        expenses.map(expense => {
-                <Card>
-                    <h3>{expense.expense_name}</h3>
-                    <p>{expense.amount}</p>
-                    <p>{expense.date}</p>
-                    <p>{expense.by_whom}</p>
-                    <p>{expense.members[0].name}</p>
-                </Card>
-        })
-    }
-    
+    const showExpense = () => expenses.map(expense =>
+            <Card key={expense.id}>
+                <h3>{expense.expense_name}</h3>
+                <p>{expense.amount}</p>
+                <p>{expense.date}</p>
+                <p>{expense.by_whom}</p>
+                <p>{expense.members[0].name}</p>
+            </Card>
+        )
+   
     return (
         <div>
-            {showExpense(expenses)}
+            {showExpense()}
         </div>
     )
 }

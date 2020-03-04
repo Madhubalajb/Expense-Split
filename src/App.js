@@ -7,7 +7,7 @@ import ExpenseModal from './components/ExpenseModal'
 import expenseService from './services/expense-split'
 
 const App = () => {
-  const [expenses, setExpenses] = useState([])
+  const [expense, setExpense] = useState([])
   const [expName, setExpName] = useState('')
   const [date, setDate] = useState('')
   const [amt, setAmt] = useState('')
@@ -49,7 +49,7 @@ const App = () => {
   const addExpense = (event) => {
     event.preventDefault()
     const expense = {
-      id: expenses.length + 1,
+      id: expense.length + 1,
       expense_name: expName,
       date: date,
       members: members,
@@ -59,7 +59,7 @@ const App = () => {
     expenseService
       .addData(expense)
       .then(returnedExpense => {
-        setExpenses(expenses.concat(returnedExpense)) 
+        setExpense(expense.concat(returnedExpense)) 
         setExpName('')
         setDate('')
         setAmt('')
@@ -76,7 +76,7 @@ const App = () => {
         <ExpenseForm ExpName={handleExpName} date={handleDate} Amount={handleAmount} Member={handleMember} addExpense={addExpense} addMember={addMember} 
             rmMember={removeMember} members={members} expenseName={expName} dateValue={date} amount={amt} radio={handleRadio} checkbox={handleCheckbox}/>
         <DisplayExpense />
-        <ExpenseModal dummy={expenses[0]} />
+        <ExpenseModal/>
         <footer className="bottom">
           designed & developed by <a href="https://madhubalajb.github.io/" rel="noopener noreferrer" target="_blank">madhubala jayakumaran</a> <br/>
         </footer>

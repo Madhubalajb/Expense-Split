@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import {Badge} from 'react-bootstrap'
 import Navigation from './components/Navigation'
 import ExpenseForm from './components/ExpenseForm'
 import ExpenseModal from './components/ExpenseModal'
 import expenseService from './services/expense-split'
+import DisplayExpense from '../components/DisplayExpense'
 
 const App = () => {
   const [expense, setExpense] = useState([])
@@ -68,8 +70,9 @@ const App = () => {
   }
 
   return (
-    <div>
+    <Router>
       <Navigation />
+      <Route exact path="/user" component={DisplayExpense} />
       <center>
         <p><Badge>React JS</Badge > <b>+</b> <Badge>REST API</Badge> <b>+</b> <Badge>Node JS</Badge> <b>+</b> <Badge>Express</Badge> <b>+</b> <Badge>mongoDB</Badge></p>
         
@@ -80,7 +83,7 @@ const App = () => {
           designed & developed by <a href="https://madhubalajb.github.io/" rel="noopener noreferrer" target="_blank">madhubala jayakumaran</a> <br/>
         </footer>
       </center>
-    </div>
+    </Router>
   )
 }
 

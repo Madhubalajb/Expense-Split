@@ -13,7 +13,7 @@ const DisplayExpense = () => {
             <Card key={expense.id}>
                 <h3>{expense.expense_name}</h3>
                 <p>{expense.amount}</p>
-                <p>{expense.date}</p>
+                <p>{`${expense.date.getDate()}/${expense.date.getMonth()}/${expense.date.getFullYear()}`}</p>
                 <p>{expense.by_whom}</p>
                 <p>{expense.members[0].name}</p>
             </Card>

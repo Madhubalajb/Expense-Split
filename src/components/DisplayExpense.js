@@ -11,13 +11,15 @@ const DisplayExpense = () => {
 
     const showExpense = () => expenses.map(expense => {
         let date = new Date(expense.date)
+        let count = expense.members.length
+        let share = expense.amount / count
         return(
             <Card key={expense.id}>
-                <h3>{expense.expense_name}</h3>
-                <p>{expense.amount}</p>
-                <p>{`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</p>
-                <p>{expense.by_whom}</p>
-                <p>{expense.members[0].name}</p>
+                <h3>Expense Name - {expense.expense_name}</h3>
+                <p>Amount - {expense.amount}</p>
+                <p>Date - {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</p>
+                <p>By -{expense.by_whom}</p>
+                <p>Members {expense.members.map(memb => memb.name)} {share}</p>
             </Card> )
         })
    

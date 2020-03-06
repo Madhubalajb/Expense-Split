@@ -9,16 +9,17 @@ const DisplayExpense = () => {
         expenseService.getData().then(expenses => setExpenses(expenses))
     }, [])
 
-    const showExpense = () => expenses.map(expense =>
+    const showExpense = () => expenses.map(expense => {
+        return(
             <Card key={expense.id}>
                 <h3>{expense.expense_name}</h3>
                 <p>{expense.amount}</p>
-                <p>{`${expense.date.getDate()}/${expense.date.getMonth()}/${expense.date.getFullYear()}`}</p>
+                <p>{}</p>
                 <p>.</p>
                 <p>{expense.by_whom}</p>
                 <p>{expense.members[0].name}</p>
-            </Card>
-        )
+            </Card> )
+        })
    
     return (
         <div>

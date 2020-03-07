@@ -2,7 +2,6 @@ import React from 'react'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Navigation from './components/Navigation'
 import Home from './components/Home'
-import DisplayExpense from './components/DisplayExpense'
 
 const App = () => {
 
@@ -10,7 +9,6 @@ const App = () => {
     <Router>
       <Navigation />
       <Route exact path="/" component={Home} />
-      <Route exact path="/user" component={DisplayExpense} />
     </Router>
   )
 }

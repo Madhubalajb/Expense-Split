@@ -1,12 +1,12 @@
 import React from 'react'
-import { Navbar, Nav } from 'react-bootstrap'
+import {Navbar, Nav} from 'react-bootstrap'
 import UserService from './UserService'
 
 const Navigation = () => {
     return (
         <Navbar collapseOnSelect expand="sm" className="fixed-top">
             <Navbar.Brand href="/">
-                <b>Expense <span className="slash">/</span> Split</b>
+                <b>Expense <span className="slash">/</span> Split</b> 
             </Navbar.Brand>
 
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />

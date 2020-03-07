@@ -89,7 +89,7 @@ const UserService = () => {
     else {
         return (
             <Router>
-                <Link to="/user"><b>{user.username}</b></Link>
+                <Nav.Link><Link to="/user"><b>{user.username}</b></Link></Nav.Link>
                 <Nav.Link onClick={logout}><b>Logout</b></Nav.Link>
 
                 <Switch>

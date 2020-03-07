@@ -18,17 +18,17 @@ const DisplayExpense = () => {
         if(count > 0) {
             return(
                 <Card key={expense.id}>
-                    <h3>Expense Name - {expense.expense_name}</h3>
+                    <h5>Expense Name - {expense.expense_name}</h5>
                     <p>Amount - {expense.amount}</p>
                     <p>Date - {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</p>
                     <p>By - {expense.by_whom}</p>
-                    <p>Members {to_whom.map(member => `${member.name} ${share}`) }</p>
+                    <p>Members {to_whom.map(member => `${member.name} ${share} `) }</p>
                 </Card> )
         }
         else {
             return(
                 <Card key={expense.id}>
-                <h3>Expense Name - {expense.expense_name}</h3>
+                <h5>Expense Name - {expense.expense_name}</h5>
                 <p>Amount - {expense.amount}</p>
                 <p>Date - {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</p>
                 <p>By -{expense.by_whom}</p>

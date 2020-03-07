@@ -12,7 +12,9 @@ const DisplayExpense = () => {
     const showExpense = () => expenses.map(expense => {
         let date = new Date(expense.date)
         let to_whom = expense.members.filter(member => member.isChecked === true)
+        console.log(to_whom)
         let count = to_whom.length
+        console.log(count)
         let share = expense.amount / count
         return(
             <Card key={expense.id}>

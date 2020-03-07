@@ -1,12 +1,10 @@
 import React, {useState,useEffect} from 'react'
-import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom'
 import {Nav} from 'react-bootstrap'
 import LoginModal from './Login'
 import SignupModal from './Signup'
 import loginService from '../services/login'
 import signupService from '../services/signup'
 import expenseService from '../services/expense-split'
-import DisplayExpense from '../components/DisplayExpense'
 
 const UserService = () => {
     const [loginModal, setLoginModal] = useState(false)
@@ -88,16 +86,10 @@ const UserService = () => {
     }
     else {
         return (
-            <Router>
-                <Nav.Link><Link to="/user"><b>{user.username}</b></Link></Nav.Link>
+            <div>
+                <Nav.Link href="/user"><b>{user.username}</b></Nav.Link>
                 <Nav.Link onClick={logout}><b>Logout</b></Nav.Link>
-
-                <Switch>
-                    <Route path="/user">
-                        <DisplayExpense />
-                    </Route>
-                </Switch>
-            </Router>
+            </div>
         )
     }
 }

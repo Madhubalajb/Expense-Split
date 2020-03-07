@@ -1,75 +1,17 @@
-import React, {useState} from 'react'
-import {Badge} from 'react-bootstrap'
+import React from 'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Navigation from './components/Navigation'
-import ExpenseForm from './components/ExpenseForm'
-import ExpenseModal from './components/ExpenseModal'
-import expenseService from './services/expense-split'
+import Home from './components/Home'
+import DisplayExpense from './components/DisplayExpense'
 
 const App = () => {
-  const [expense, setExpense] = useState([])
-  const [expName, setExpName] = useState('')
-  const [date, setDate] = useState('')
-  const [amt, setAmt] = useState('')
-  const [members, setMembers] = useState([{name: null, isChecked: false}])
-  const [by, setBy] = useState('')
-  
-  const handleExpName = (event) => setExpName(event.target.value)
-
-  const handleDate = (event) => setDate(event.target.value)
-
-  const handleAmount = (event) => setAmt(event.target.value)
-
-  const handleRadio = (event) => setBy(event.target.value)
-
-  const handleMember = (event, index) => {
-    const temp = [...members]
-    temp[index].name = event.target.value
-    setMembers(temp)
-  }
- 
-  const addMember = () => {
-    const temp = [...members]
-    temp.push({name: null, isChecked: false})
-    setMembers(temp)
-  }
-
-  const removeMember = (index) => {
-    const temp = [...members]
-    temp.splice(index, 1)
-    setMembers(temp)
-  }
-
-  const handleCheckbox = (index) => {
-    const temp = [...members]
-    temp[index].isChecked = !temp[index].isChecked
-    setMembers(temp)
-  }
-
-  const addExpense = (event) => {
-    event.preventDefault()
-    const expense = {
-      expense_name: expName,
-      date: date,
-      members: members,
-      amount: Number(amt),
-      by_whom: by
-    }
-    expenseService
-      .addData(expense)
-      .then(returnedExpense => {
-        setExpense(expense.concat(returnedExpense)) 
-        setExpName('')
-        setDate('')
-        setAmt('')
-        setMembers([])
-        setBy('')
-      })
-  }
 
   return (
-    <div>
+    <Router>
       <Navigation />
-    </div>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/user" component={DisplayExpense} />
+    </Router>
   )
 }
 

@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import {Badge} from 'react-bootstrap'
-import ExpenseForm from './components/ExpenseForm'
-import ExpenseModal from './components/ExpenseModal'
-import expenseService from './services/expense-split'
+import ExpenseForm from './ExpenseForm'
+import ExpenseModal from './ExpenseModal'
+import expenseService from '../services/expense-split'
 
 const Home = () => {
     const [expense, setExpense] = useState([])

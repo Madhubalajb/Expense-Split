@@ -32,9 +32,8 @@ const DisplayExpense = () => {
                 <p>Amount - {expense.amount}</p>
                 <p>Date - {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</p>
                 <p>By -{expense.by_whom}</p>
-                <p>Members {by_whom} {share}</p>
+                <p>Members {expense.by_whom} {share}</p>
             </Card> )               
-            )
         }
         })
    

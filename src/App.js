@@ -48,7 +48,6 @@ const App = () => {
   const addExpense = (event) => {
     event.preventDefault()
     const expense = {
-      id: expense.length + 1,
       expense_name: expName,
       date: date,
       members: members,

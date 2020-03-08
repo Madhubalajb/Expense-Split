@@ -38,7 +38,7 @@ body {
     #snackbar {
         visibility: visible;
         min-width: 250px;
-        background-color: black;
+        background-color: $Navy-Blue;
         color: white;
         text-align: center;
         border-radius: 2px;
@@ -48,6 +48,24 @@ body {
         left: 50%;
         bottom: 30px;
         z-index: 1;
+        animation: fadein 0.5s, fadeout 0.5s 0.25s;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 0.25s;
+    }
+    @keyframes fadein {
+        from {bottom: 0; opacity: 0;}
+        to {bottom: 30px; opacity: 1;}
+    }
+    @-webkit-keyframes fadein {
+        from {bottom: 0; opacity: 0;}
+        to {bottom: 30px; opacity: 1;}
+    }
+    @keyframes fadeout {
+        from {bottom: 30px; opacity: 1;}
+        to {bottom: 0; opacity: 0;}
+    }
+    @-webkit-keyframes fadeout {
+        from {bottom: 30px; opacity: 1;}
+        to {bottom: 0; opacity: 0;}
     }
     .split {
         padding-top: 80px;

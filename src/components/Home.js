@@ -62,7 +62,7 @@ const Home = () => {
         amount: Number(amt),
         by_whom: by
       }
-      if(expense.expense_name !== '' && expense.date !== '' && expense.amount !== '' && expense.by_whom !== '' && expense.members.length !== 0) {
+      if(expense.expense_name !== '' && expense.date !== '' && expense.amount !== '' && expense.by_whom !== '' && expense.members.length !== 0 ) {
         expenseService.addData(expense)
         .then(returnedExpense => {
           setExpenses(expenses.concat(returnedExpense)) 
@@ -73,8 +73,11 @@ const Home = () => {
           setBy('')
         })
         .catch(error => {
-          showMessage(<div id="snackbar">Validation failed :</div>)
+          showMessage(<div id="snackbar">Validation failed :( <br />Please verify your details</div>)
         })
+      }
+      else if(isNaN(expense.amount) !== false) {
+        showMessage(<div id="snackbar">Please enter a valid Amount :)</div>)
       }
       else {
         showMessage(<div id="snackbar">Please enter all the details :)</div>)

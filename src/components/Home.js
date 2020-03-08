@@ -17,8 +17,8 @@ const Home = () => {
     const showMessage = (message) => {
       setMessage(message)
       setTimeout(() => {
-        setMessage('')
-      }, 3000)
+        setMessage(null)
+      }, 5000)
     }
     
     const handleExpName = (event) => setExpName(event.target.value)
@@ -62,7 +62,7 @@ const Home = () => {
         amount: Number(amt),
         by_whom: by
       }
-      if(expense.expense_name !== null || expense.date !== null || expense.amount !== null || expense.by_whom !== null || expense.members.length !== 0) {
+      if(expense.expense_name !== null && expense.date !== null && expense.amount !== null && expense.by_whom !== null && expense.members.length !== 0) {
         expenseService.addData(expense)
         .then(returnedExpense => {
           setExpenses(expenses.concat(returnedExpense)) 

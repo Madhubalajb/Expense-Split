@@ -5,7 +5,7 @@ import ExpenseModal from './ExpenseModal'
 import expenseService from '../services/expense-split'
 
 const Home = () => {
-    const [expense, setExpense] = useState([])
+    const [expenses, setExpenses] = useState([])
     const [expName, setExpName] = useState('')
     const [date, setDate] = useState('')
     const [amt, setAmt] = useState('')
@@ -56,7 +56,7 @@ const Home = () => {
       expenseService
         .addData(expense)
         .then(returnedExpense => {
-          setExpense(expense.concat(returnedExpense)) 
+          setExpenses(expenses.concat(returnedExpense)) 
           setExpName('')
           setDate('')
           setAmt('')

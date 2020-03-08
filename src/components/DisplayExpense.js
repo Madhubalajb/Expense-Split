@@ -45,7 +45,7 @@ const DisplayExpense = () => {
    
     return (
         <Container>
-            <Row>
+            <Row className="row-cols-4">
                 {showExpense()}  
             </Row>
         </Container>

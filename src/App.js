@@ -10,6 +10,7 @@ const App = () => {
       <Router>
         <Navigation />
         <Route exact path="/" component={Home} />
+        <Route exact path="/user" render={() => <DisplayExpense />} />
       </Router>
   )
 }

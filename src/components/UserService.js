@@ -1,4 +1,5 @@
 import React, {useState,useEffect} from 'react'
+import {Link} from 'react-router-dom'
 import {Nav} from 'react-bootstrap'
 import LoginModal from './Login'
 import SignupModal from './Signup'
@@ -87,7 +88,7 @@ const UserService = () => {
     else {
         return (
             <div>
-                <Nav.Link href="/user"><b>{user.username}</b></Nav.Link>
+                <Nav.Link><Link to="/user"><b>{user.username}</b></Link></Nav.Link>
                 <Nav.Link onClick={logout}><b>Logout</b></Nav.Link>
             </div>
         )

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {Card} from 'react-bootstrap'
+import {Container, Row, Col, Card} from 'react-bootstrap'
 import expenseService from '../services/expense-split'
 
 const DisplayExpense = () => {
@@ -17,30 +17,38 @@ const DisplayExpense = () => {
 
         if(count > 0) {
             return(
-                <Card key={expense.id}>
-                    <h5>Expense Name - {expense.expense_name}</h5>
-                    <p>Amount - {expense.amount}</p>
-                    <p>Date - {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</p>
-                    <p>By - {expense.by_whom}</p>
-                    <p>Members {to_whom.map(member => `${member.name} ${share} `) }</p>
-                </Card> )
+                <Col>
+                    <Card key={expense.id}>
+                        <h5>Expense Name - {expense.expense_name}</h5>
+                        <p>Amount - {expense.amount}</p>
+                        <p>Date - {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</p>
+                        <p>By - {expense.by_whom}</p>
+                        <p>Members {to_whom.map(member => `${member.name} ${share} `) }</p>
+                    </Card>
+                </Col>
+                )
         }
         else {
             return(
-                <Card key={expense.id}>
-                <h5>Expense Name - {expense.expense_name}</h5>
-                <p>Amount - {expense.amount}</p>
-                <p>Date - {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</p>
-                <p>By -{expense.by_whom}</p>
-                <p>Members {expense.by_whom} {expense.amount}</p>
-            </Card> )               
+                <Col>
+                    <Card key={expense.id}>
+                        <h5>Expense Name - {expense.expense_name}</h5>
+                        <p>Amount - {expense.amount}</p>
+                        <p>Date - {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</p>
+                        <p>By -{expense.by_whom}</p>
+                        <p>Members {expense.by_whom} {expense.amount}</p>
+                    </Card> 
+                </Col>
+                )               
         }
         })
    
     return (
-        <div>
-            {showExpense()}
-        </div>
+        <Container>
+            <Row>
+                {showExpense()}  
+            </Row>
+        </Container>
     )
 }
 

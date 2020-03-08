@@ -5,6 +5,7 @@ import LoginModal from './Login'
 import SignupModal from './Signup'
 import loginService from '../services/login'
 import signupService from '../services/signup'
+import Notification from './Notification'
 import expenseService from '../services/expense-split'
 
 const UserService = () => {
@@ -20,6 +21,14 @@ const UserService = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [user, setUser] = useState([])
+    const [message, setMessage] = useState('')
+
+    const showMessage = (message) => {
+        setMessage(message)
+        setTimeout(() => {
+            setMessage('')
+        }, 3000)
+    }
 
     useEffect(() => {
         const loggedUserJSON = window.localStorage.getItem('logged-Expense-Split-User')
@@ -58,6 +67,7 @@ const UserService = () => {
             const addedUser = await signupService.signup({
                 name, username, password
             })
+            showMessage(<div id="snackbar">{`User ${addedUser.username} created`}</div>)
             setUser('')
             setUsername('')
             setPassword('')
@@ -77,6 +87,7 @@ const UserService = () => {
     if(user === '') {
         return (
             <div>
+                <Notification msg={message} />
                 <Nav.Link onClick={handleLoginModal}><b>log <span className="foo">In</span></b></Nav.Link>
                 <LoginModal show={loginModal} Close={handleLoginNoModal} username={handleUsername} pwd={handlePassword} login={handleLogin}/>
     
@@ -88,6 +99,7 @@ const UserService = () => {
     else {
         return (
             <div>
+                <Notification msg={message} />
                 <Nav.Link><Link to="/user"><b>{user.username}</b></Link></Nav.Link>
                 <Nav.Link onClick={logout}><b>Logout</b></Nav.Link>
             </div>

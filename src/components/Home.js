@@ -18,7 +18,7 @@ const Home = () => {
       setMessage(message)
       setTimeout(() => {
         setMessage(null)
-      }, 5000)
+      }, 3000)
     }
     
     const handleExpName = (event) => setExpName(event.target.value)
@@ -62,7 +62,9 @@ const Home = () => {
         amount: Number(amt),
         by_whom: by
       }
-      if(expense.expense_name !== '' && expense.date !== '' && expense.amount !== '' && expense.by_whom !== '' && expense.members.length !== 0 ) {
+      if(expense.expense_name !== '' && expense.date !== '' && expense.amount !== '' && expense.by_whom !== '' && expense.members.length !== 0 &&
+        isNaN(expense.amount) !== true) {
+        console.log(isNaN(expense.amount))
         expenseService.addData(expense)
         .then(returnedExpense => {
           setExpenses(expenses.concat(returnedExpense)) 
@@ -76,7 +78,7 @@ const Home = () => {
           showMessage(<div id="snackbar">Validation failed :( <br />Please verify your details</div>)
         })
       }
-      else if(isNaN(expense.amount) !== false) {
+      else if(isNaN(expense.amount) === true) {
         showMessage(<div id="snackbar">Please enter a valid Amount :)</div>)
       }
       else {

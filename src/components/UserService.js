@@ -50,12 +50,19 @@ const UserService = () => {
         }).catch(error => {
             showMessage(<div id="snackbar">{`${error}`}</div>)
         })
-        window.localStorage.setItem('logged-Expense-Split-User', JSON.stringify(user))
-        expenseService.setToken(user.token)
-        setUser(user)
-        setUsername('')
-        setPassword('')
-        handleLoginNoModal()
+        if(user) {
+            window.localStorage.setItem('logged-Expense-Split-User', JSON.stringify(user))
+            expenseService.setToken(user.token)
+            setUser(user)
+            setUsername('')
+            setPassword('')
+            handleLoginNoModal()
+        }
+        else {
+            setUsername('')
+            setPassword('')
+            handleLoginNoModal()
+        }
     }
 
     const handleSignup = async (event) => {

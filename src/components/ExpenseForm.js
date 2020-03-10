@@ -34,7 +34,7 @@ const ExpenseForm = (props) => {
                 <Col>
                     <Card>
                         <h4>3) Enter the Expenses</h4>
-                        <Form.Control onChange={props.Amount} value={props.amount || ""} placeholder="Amount" required/>
+                        <Form.Control onChange={props.Amount} value={props.amt || ""} placeholder="Amount" required/>
                         <Row><b>By whom:</b></Row> 
                         <Row>
                         {

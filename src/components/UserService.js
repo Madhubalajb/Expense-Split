@@ -45,37 +45,29 @@ const UserService = () => {
 
     const handleLogin = async (event) => {
         event.preventDefault()
-        try {
-            const user = await loginService.login({
-                username, password
-            })
-            window.localStorage.setItem('logged-Expense-Split-User', JSON.stringify(user))
-            expenseService.setToken(user.token)
-            setUser(user)
-            setUsername('')
-            setPassword('')
-            handleLoginNoModal()
-        } 
-        catch (exception){
-            console.log(exception)
-        }
+        const user = await loginService.login({
+            username, password
+        }).catch(error => {
+            showMessage(<div id="snackbar">{`${error}`}</div>)
+        })
+        window.localStorage.setItem('logged-Expense-Split-User', JSON.stringify(user))
+        expenseService.setToken(user.token)
+        setUser(user)
+        setUsername('')
+        setPassword('')
+        handleLoginNoModal()
     }
 
     const handleSignup = async (event) => {
         event.preventDefault()
-        try {
-            const addedUser = await signupService.signup({
-                name, username, password
-            })
-            showMessage(<div id="snackbar">{`User ${addedUser.username} created`}</div>)
-            setUser('')
-            setUsername('')
-            setPassword('')
-            handleSignupNoModal()
-        }
-        catch (exception) {
-            console.log(exception)
-        }
+        const addedUser = await signupService.signup({
+            name, username, password
+        })
+        showMessage(<div id="snackbar">{`User ${addedUser.name} created`}</div>)
+        setUser('')
+        setUsername('')
+        setPassword('')
+        handleSignupNoModal()
     }
 
     const logout = () => {
@@ -100,7 +92,7 @@ const UserService = () => {
         return (
             <div>
                 <Notification msg={message} />
-                <Nav.Link><Link to="/user"><b>{user.username}</b></Link></Nav.Link>
+                <Nav.Link><Link to="/user"><b>{user.name}</b></Link></Nav.Link>
                 <Nav.Link onClick={logout}><b>Logout</b></Nav.Link>
             </div>
         )

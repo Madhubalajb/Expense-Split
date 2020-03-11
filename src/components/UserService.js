@@ -47,11 +47,9 @@ const UserService = () => {
         event.preventDefault()
         const user = await loginService.login({
             username, password
-        }).catch(error => {
-            //showMessage(<div id="snackbar">{`${error.message}`}</div>)
-            console.log(error)
         })
-        if(user) {
+        console.log(user)
+        if(user.token) {
             window.localStorage.setItem('logged-Expense-Split-User', JSON.stringify(user))
             expenseService.setToken(user.token)
             setUser(user)
@@ -60,6 +58,7 @@ const UserService = () => {
             handleLoginNoModal()
         }
         else {
+            showMessage(<div id="snackbar">{user.error}</div>)
             setUsername('')
             setPassword('')
             handleLoginNoModal()

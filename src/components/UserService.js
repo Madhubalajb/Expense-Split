@@ -48,7 +48,8 @@ const UserService = () => {
         const user = await loginService.login({
             username, password
         }).catch(error => {
-            showMessage(<div id="snackbar">{`${error}`}</div>)
+            //showMessage(<div id="snackbar">{`${error.message}`}</div>)
+            console.log(error)
         })
         if(user) {
             window.localStorage.setItem('logged-Expense-Split-User', JSON.stringify(user))

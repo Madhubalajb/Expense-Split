@@ -45,22 +45,19 @@ const UserService = () => {
 
     const handleLogin = async (event) => {
         event.preventDefault()
-        try {
-            const user = await loginService.login({
-                username, password
-            }).catch(error => {
-                showMessage(<div id="snackbar">{`${error}`}</div>)
-            })
+        const user = await loginService.login({
+            username, password
+        }).catch(error => {
+            showMessage(<div id="snackbar">{error}</div>)
+        })
+        if(user) {
             window.localStorage.setItem('logged-Expense-Split-User', JSON.stringify(user))
             expenseService.setToken(user.token)
             setUser(user)
             setUsername('')
             setPassword('')
-            handleLoginNoModal()
-        } 
-        catch (exception){
-            console.log(exception)
-        }  
+            handleLoginNoModal()   
+        }
     }
 
     const handleSignup = async (event) => {

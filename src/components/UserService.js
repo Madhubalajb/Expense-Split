@@ -20,7 +20,7 @@ const UserService = () => {
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [user, setUser] = useState([])
+    const [user, setUser] = useState('')
     const [message, setMessage] = useState('')
 
     const showMessage = (message) => {
@@ -45,24 +45,20 @@ const UserService = () => {
 
     const handleLogin = async (event) => {
         event.preventDefault()
-        const user = await loginService.login({
+        await loginService.login({
             username, password
-        }).catch(error => {
-            showMessage(<div id="snackbar">{error}</div>)
         })
-        if(!(user === undefined)) {
+        .then(user => {
             window.localStorage.setItem('logged-Expense-Split-User', JSON.stringify(user))
             expenseService.setToken(user.token)
             setUser(user)
             setUsername('')
             setPassword('')
-            handleLoginNoModal()   
-        }
-        else {
-            setUsername('')
-            setPassword('')
             handleLoginNoModal()
-        }
+        })
+        .catch(error => 
+            showMessage(<div id="snackbar">'Invalid Username and Password'</div>)
+        )
     }
 
     const handleSignup = async (event) => {

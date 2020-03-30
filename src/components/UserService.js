@@ -68,6 +68,7 @@ const UserService = () => {
         })
         showMessage(<div id="snackbar">{`User ${addedUser.name} created`}</div>)
         setUser('')
+        setName('')
         setUsername('')
         setPassword('')
         handleSignupNoModal()

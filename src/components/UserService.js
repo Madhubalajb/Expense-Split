@@ -61,10 +61,10 @@ const UserService = () => {
             expenseService.setToken(user.token)
             setUser(user)
             makeNull()
-            showMessage(<div>Hi {user.username} <i className="material-icons">sentiment_very_satisfied</i></div>)
+            showMessage(<div>Hi {user.username} <i className="material-icons face">sentiment_very_satisfied</i></div>)
         })
         .catch(error => {
-            showMessage(<div id="snackbar">Invalid Username / Password <i className="material-icons">sentiment_very_dissatisfied</i></div>)
+            showMessage(<div id="snackbar">Invalid Username / Password <i className="material-icons face">sentiment_very_dissatisfied</i></div>)
             makeNull()
         })
     }
@@ -75,17 +75,17 @@ const UserService = () => {
             name, username, password
         })
         .then(savedUser => {
-            showMessage(<div id="snackbar">User {savedUser.name} added <i className="material-icons">sentiment_very_satisfied</i></div>)
+            showMessage(<div id="snackbar">User {savedUser.name} added <i className="material-icons face">sentiment_very_satisfied</i></div>)
             makeNull()
         })
         .catch(error => {
-            showMessage(<div id="snackbar">Something went wrong <i className="material-icons">sentiment_very_dissatisfied</i></div>)
+            showMessage(<div id="snackbar">Something went wrong <i className="material-icons face">sentiment_very_dissatisfied</i></div>)
             makeNull()
         })
     }
 
     const logout = () => {
-        showMessage(<div id="snackbar">Bye {user.username} <i className="material-icons">sentiment_dissatisfied</i></div>)
+        showMessage(<div id="snackbar">Bye {user.username} <i className="material-icons face">sentiment_dissatisfied</i></div>)
         setUser('')
         window.localStorage.removeItem('logged-Expense-Split-User')
         expenseService.setToken('')

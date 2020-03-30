@@ -3,9 +3,9 @@ import {Link} from 'react-router-dom'
 import {Nav} from 'react-bootstrap'
 import LoginModal from './Login'
 import SignupModal from './Signup'
+import Notification from './Notification'
 import loginService from '../services/login'
 import signupService from '../services/signup'
-import Notification from './Notification'
 import expenseService from '../services/expense-split'
 
 const UserService = () => {
@@ -17,10 +17,10 @@ const UserService = () => {
     const handleSignupModal = () => setSignupModal(true)
     const handleSignupNoModal = () => setSignupModal(false)
 
+    const [user, setUser] = useState('')
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [user, setUser] = useState('')
     const [message, setMessage] = useState('')
 
     const showMessage = (message) => {
@@ -28,6 +28,14 @@ const UserService = () => {
         setTimeout(() => {
             setMessage('')
         }, 3000)
+    }
+
+    const makeNull = () => {
+        setName('')
+        setUsername('')
+        setPassword('')
+        handleLoginNoModal()
+        handleSignupNoModal()
     }
 
     useEffect(() => {
@@ -52,29 +60,32 @@ const UserService = () => {
             window.localStorage.setItem('logged-Expense-Split-User', JSON.stringify(user))
             expenseService.setToken(user.token)
             setUser(user)
-            setUsername('')
-            setPassword('')
-            handleLoginNoModal()
+            makeNull()
+            showMessage(<div>Hi {user.username} <i className="material-icons">sentiment_very_satisfied</i></div>)
         })
-        .catch(error => 
-            showMessage(<div id="snackbar">'Invalid Username and Password'</div>)
-        )
+        .catch(error => {
+            showMessage(<div id="snackbar">Invalid Username / Password <i className="material-icons">sentiment_very_dissatisfied</i></div>)
+            makeNull()
+        })
     }
 
     const handleSignup = async (event) => {
         event.preventDefault()
-        const addedUser = await signupService.signup({
+        await signupService.signup({
             name, username, password
         })
-        showMessage(<div id="snackbar">{`User ${addedUser.name} created`}</div>)
-        setUser('')
-        setName('')
-        setUsername('')
-        setPassword('')
-        handleSignupNoModal()
+        .then(savedUser => {
+            showMessage(<div id="snackbar">User {savedUser.name} added <i className="material-icons">sentiment_very_satisfied</i></div>)
+            makeNull()
+        })
+        .catch(error => {
+            showMessage(<div id="snackbar">Something went wrong <i className="material-icons">sentiment_very_dissatisfied</i></div>)
+            makeNull()
+        })
     }
 
     const logout = () => {
+        showMessage(<div id="snackbar">Bye {user.username} <i className="material-icons">sentiment_dissatisfied</i></div>)
         setUser('')
         window.localStorage.removeItem('logged-Expense-Split-User')
         expenseService.setToken('')

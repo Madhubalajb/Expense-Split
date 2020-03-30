@@ -75,14 +75,14 @@ const Home = () => {
           setBy('')
         })
         .catch(error => {
-          showMessage(<div id="snackbar">Validation failed :( <br />Please verify your details</div>)
+          showMessage(<div id="snackbar">Validation failed, Please verify expense details.</div>)
         })
       }
       else if(isNaN(expense.amount) === true) {
-        showMessage(<div id="snackbar">Please enter a valid Amount :)</div>)
+        showMessage(<div id="snackbar">Please enter a valid Amount</div>)
       }
       else {
-        showMessage(<div id="snackbar">Please enter all the details :)</div>)
+        showMessage(<div id="snackbar">Please enter all the details</div>)
       }
     } 
 

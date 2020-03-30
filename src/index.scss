@@ -65,7 +65,7 @@ body {
     }
     .footer {
         vertical-align: bottom;
-        margin-top: 125px;
+        margin-top: 170px;
         font-size: 1.1rem;
     }
     #snackbar {
@@ -81,6 +81,7 @@ body {
         left: 50%;
         bottom: 30px;
         z-index: 1;
+        display: flex;
         -webkit-animation: fadein 0.5s, fadeout 0.5s 0.25s;
         animation: fadein 0.5s, fadeout 0.5s 0.25s;
     }
@@ -100,6 +101,23 @@ body {
         from {bottom: 30px; opacity: 1;}
         to {bottom: 0; opacity: 0;}
     }
+    .material-icons {
+        font-family: 'Material Icons';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 24px;  
+        display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        -moz-osx-font-smoothing: grayscale;
+        font-feature-settings: 'liga';
+      }
     .split {
         padding-top: 80px;
         .card {

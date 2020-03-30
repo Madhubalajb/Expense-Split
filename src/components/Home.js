@@ -1,4 +1,5 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import ExpenseForm from './ExpenseForm'
 import ExpenseModal from './ExpenseModal'
 import Notification from './Notification'
@@ -90,10 +91,10 @@ const Home = () => {
             <Notification msg={message} />
             
             <ExpenseForm ExpName={handleExpName} date={handleDate} Amount={handleAmount} Member={handleMember} addExpense={addExpense} addMember={addMember} 
-                rmMember={removeMember} members={members} expenseName={expName} dateValue={date} amt={amt} radio={handleRadio} checkbox={handleCheckbox}/>
+              rmMember={removeMember} members={members} expenseName={expName} dateValue={date} amt={amt} radio={handleRadio} checkbox={handleCheckbox}/>
             
             <footer className="bottom">
-              <a href="/about">about</a>
+              <Link to="/about">about</Link>
             </footer>
         </center>       
     )

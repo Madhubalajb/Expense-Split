@@ -58,10 +58,15 @@ body {
         display: inline-block;
     }
     .tech::before {
-        content: "$";
+        content: "▹";
         color: #673AB7;
         font-size: 18px;
         line-height: 35px;
+    }
+    .footer {
+        vertical-align: bottom;
+        margin-top: 125px;
+        font-size: 1.1rem;
     }
     #snackbar {
         visibility: visible;

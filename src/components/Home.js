@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import {Badge} from 'react-bootstrap'
 import ExpenseForm from './ExpenseForm'
 import ExpenseModal from './ExpenseModal'
 import Notification from './Notification'

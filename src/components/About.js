@@ -7,8 +7,7 @@ const About = () => {
     return (
         <center className="container">
             <div>
-                <img className="phonebook_logo" src={logo} alt="Phonebook Logo" />
-                <h2>Phonebook</h2>
+                <h3><b>Expense <span className="slash">/</span> Split</b></h3>
                 <div className="logos">
                     <span className="logo react">
                       <img src={react} alt="Reactjs" title="React" />

@@ -28,16 +28,44 @@ body {
     .btn {
         width: fit-content;
     }
-    .badge {
-        padding: 8px;
-        background-color: $Navy-Blue;
-        font-size: 0.8rem;
-        color: white;
-        letter-spacing: 1px;
+    .logos {
+        .node{
+            img {
+                width: 160px;
+            }
+        }
+        .react {
+            img {
+                width: 120px;
+            }
+        }
+        .mongodb {
+            img {
+                width: 55px;
+                margin: 0 10px;
+            }
+        }
+        .plus {
+            margin: 0 20px;
+            font-size: 25px;
+            font-weight: 500;
+        }
+    }
+    .stack {
+        margin-top: 40px;
+        list-style: none;
+        text-align: justify;
+        display: inline-block;
+    }
+    .tech::before {
+        content: "$";
+        color: #673AB7;
+        font-size: 18px;
+        line-height: 35px;
     }
     #snackbar {
         visibility: visible;
-        min-width: 250px;
+        min-width: fit-content;
         background-color: $Navy-Blue;
         color: white;
         text-align: center;

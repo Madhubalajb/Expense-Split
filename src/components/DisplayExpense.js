@@ -21,7 +21,7 @@ const DisplayExpense = () => {
                     <Card key={expense.id}>
                         <h5>Expense Name - {expense.expense_name}</h5>
                         <p>Amount - {expense.amount}</p>
-                        <p>Date - {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</p>
+                        <p>Date - {date.getDate()}/{date.getMonth()}/{date.getFullYear()}</p>
                         <p>By - {expense.by_whom}</p>
                         <p>Members {to_whom.map(member => `${member.name} ${share} `) }</p>
                     </Card>
@@ -34,7 +34,7 @@ const DisplayExpense = () => {
                     <Card key={expense.id}>
                         <h5>Expense Name - {expense.expense_name}</h5>
                         <p>Amount - {expense.amount}</p>
-                        <p>Date - {`${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`}</p>
+                        <p>Date - {date.getDate()}/{date.getMonth()}/{date.getFullYear()}</p>
                         <p>By -{expense.by_whom}</p>
                         <p>Members {expense.by_whom} {expense.amount}</p>
                     </Card> 

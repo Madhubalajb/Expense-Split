@@ -61,7 +61,7 @@ const UserService = () => {
             expenseService.setToken(user.token)
             setUser(user)
             makeNull()
-            showMessage(<div>Hi {user.username} <i className="material-icons face">sentiment_very_satisfied</i></div>)
+            showMessage(<div id="snackbar">Hi {user.username} <i className="material-icons face">sentiment_very_satisfied</i></div>)
         })
         .catch(error => {
             showMessage(<div id="snackbar">Invalid Username / Password <i className="material-icons face">sentiment_very_dissatisfied</i></div>)

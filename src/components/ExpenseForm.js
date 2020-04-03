@@ -39,7 +39,7 @@ const ExpenseForm = (props) => {
                     <Card>
                         <h4 className="three">3</h4>
                         <Form.Control onChange={props.handleAmount} value={props.amount || ""} placeholder="Amount" required/>
-                        <Row style={{color: "#003B73"}, {fontWeight: 500}}>By whom</Row> 
+                        <Row style={{color: "#003B73", fontWeight: 600}}>By whom</Row> 
                         <Row>
                         {
                             props.members.map((member,index) => {
@@ -52,7 +52,7 @@ const ExpenseForm = (props) => {
                         }
                         </Row>
 
-                        <Row style={{color: "#003B73"}, {fontWeight: 500}}>To whom</Row>
+                        <Row style={{color: "#003B73", fontWeight: 600}}>To whom</Row>
                         <Row>
                         {
                             props.members.map((member,index) => {
@@ -64,11 +64,16 @@ const ExpenseForm = (props) => {
                             })
                         }
                         </Row>
-                        <Button title="add more expense" onClick={(event) => (event)}>Add more expense</Button>
+                        <Button title="add more expense" onClick={(event) => props.addExpense(event)}>Add more expense</Button>
+                    </Card>
+                </Col>
+                <Col>
+                    <Card>
+
                     </Card>
                 </Col>
             </Row>
-            <Button title="Split" className="split_btn" type="submit"><b>Finally, SPLIT</b></Button>
+            <Button title="Split" className="split_btn" type="submit">Finally, SPLIT</Button>
         </Form>
     </Container>
  )

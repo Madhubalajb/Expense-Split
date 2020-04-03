@@ -31,7 +31,7 @@ body {
         width: fit-content;
         background-color: $Navy-Blue;
         border-color: $Navy-Blue;
-        margin: 5px;
+        margin: 10px;
     }
     .logos {
         .node{
@@ -166,7 +166,7 @@ body {
         }
         .split_btn {
             margin: 30px;
-            letter-spacing: 1px;
+            font-weight: 600;
             background-color: Blue;
             border-color: Blue;
         }

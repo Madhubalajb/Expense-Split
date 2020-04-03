@@ -2,68 +2,73 @@ import React from 'react'
 import {Container, Row, Col, Card, Button, Form} from 'react-bootstrap'
 
 const ExpenseForm = (props) => {
+
+
  return (
     <Container className="split">
-        <Form onSubmit={props.addExpense} >
+        <Form onSubmit={props.addExpenses} >
             <Row>
                 <Col>
                     <Card>
-                        <h4>1) Name your Expense</h4>
-                        <Form.Control onChange={props.ExpName} value={props.expenseName || ""} placeholder="Expense Name" required/>
-                        <Form.Control onChange={props.date} value={props.dateValue} type="date" placeholder="Date" required/>
+                        <h4 className="one">1</h4>
+                        <Form.Control onChange={props.handleExpName} value={props.expName || ""} placeholder="C'mon Name it" required/>
+                        <Form.Control onChange={props.handleDate} value={props.date} type="date" required/>
+                        <Button title="Name your thing">Make your 1st step</Button>
                     </Card>
                 </Col>
 
                 <Col>
                     <Card>
-                        <h4>2) Add your Group</h4>
+                        <h4 className="two">2</h4>
                         {
                             props.members.map((member,index) => {
                                 return (
-                                    <Row key={index}>
-                                        <Form.Control className="col-sm-9" value={member.name || ""} placeholder="Person Name" onChange={(event) => props.Member(event, index)} required/>
-                                        <Button className="col-sm-2 minusBtn" variant="dark" title="delete member" onClick={() => props.rmMember(index)}><b>-</b></Button>
-                                    </Row>
+                                    <div className="addPerson" key={index}>
+                                        <Form.Control value={member.name || ""} placeholder="Person Name" onChange={(event) => props.handleMember(event, index)} />
+                                        <i className="material-icons minusBtn" title="delete member" onClick={() => props.removeMember(index)}>delete </i>
+                                    </div>
                                 )
                             })
                         }
-                        <Button className="addBtn" variant="dark" title="add member" onClick={(event) => props.addMember(event)}><b>+</b></Button>
+                        <i className="material-icons addBtn" title="add member" onClick={(event) => props.addMember(event)}>add_circle</i>
+                        <Button>Make your Group</Button>
                     </Card>
                 </Col>
 
                 <Col>
                     <Card>
-                        <h4>3) Enter the Expenses</h4>
-                        <Form.Control onChange={props.Amount} value={props.amt || ""} placeholder="Amount" required/>
-                        <Row><b>By whom:</b></Row> 
+                        <h4 className="three">3</h4>
+                        <Form.Control onChange={props.handleAmount} value={props.amount || ""} placeholder="Amount" required/>
+                        <Row style={{color: "#003B73"}, {fontWeight: 500}}>By whom</Row> 
                         <Row>
                         {
                             props.members.map((member,index) => {
                                 return(
                                     <div key={index}>
-                                        <Col><Form.Check type="radio" value={member.name || ""} label={member.name} onChange={props.radio}/></Col>
+                                        <Col><Form.Check type="radio" value={member.name || ""} label={member.name} onChange={props.handleRadio}/></Col>
                                     </div>
                                 )
                             })
                         }
                         </Row>
 
-                        <Row><b>To whom:</b></Row>
+                        <Row style={{color: "#003B73"}, {fontWeight: 500}}>To whom</Row>
                         <Row>
                         {
                             props.members.map((member,index) => {
                                 return(
                                     <div key={index}>
-                                        <Col><Form.Check type="checkbox" value={member.name || ""} label={member.name} checked={member.isChecked} onChange={() => props.checkbox(index)}/></Col>
+                                        <Col><Form.Check type="checkbox" value={member.name || ""} label={member.name} onChange={() => props.handleCheckbox(index)}/></Col>
                                     </div>
                                 )
                             })
                         }
                         </Row>
+                        <Button title="add more expense" onClick={(event) => (event)}>Add more expense</Button>
                     </Card>
                 </Col>
             </Row>
-            <Button variant="dark" title="Split" className="split_btn" type="submit">Finally, Split It</Button>
+            <Button title="Split" className="split_btn" type="submit"><b>Finally, SPLIT</b></Button>
         </Form>
     </Container>
  )

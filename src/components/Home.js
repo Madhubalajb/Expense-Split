@@ -1,18 +1,34 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ExpenseForm from './ExpenseForm'
-import ExpenseModal from './ExpenseModal'
 import Notification from './Notification'
 import expenseService from '../services/expense-split'
 
 const Home = () => {
-    const [expenses, setExpenses] = useState([])
     const [expName, setExpName] = useState('')
     const [date, setDate] = useState('')
-    const [amt, setAmt] = useState('')
-    const [members, setMembers] = useState([{name: null, isChecked: false}])
-    const [by, setBy] = useState('')
+    const [amount, setAmount] = useState('')
+    const [by_whom, setBy] = useState('')
+    const [to_whom, setTo] = useState([{name: null, isChecked: false}])
+    const [members, setMembers] = useState([{name: null}, {name: null}])
+    const [expenses, setExpenses] = useState([{amount: null, by_whom: null, to_whom: [{name: null, isChecked: false}]}])
     const [message, setMessage] = useState('')
+
+    const handleExpName = (event) => setExpName(event.target.value)
+    const handleDate = (event) => setDate(event.target.value)
+    const handleAmount = (event) => setAmount(event.target.value)
+    const handleRadio = (event) => setBy(event.target.value)
+
+    const handleCheckbox = (index) => {
+        const temp = members.map(member => {
+           return {
+                name: member.name,
+                isChecked: false
+            }
+        })
+        temp[index].isChecked = !temp[index].isChecked
+        setTo(temp)
+    }
 
     const showMessage = (message) => {
       setMessage(message)
@@ -20,15 +36,7 @@ const Home = () => {
         setMessage(null)
       }, 3000)
     }
-    
-    const handleExpName = (event) => setExpName(event.target.value)
-  
-    const handleDate = (event) => setDate(event.target.value)
-  
-    const handleAmount = (event) => setAmt(event.target.value)
-  
-    const handleRadio = (event) => setBy(event.target.value)
-  
+     
     const handleMember = (event, index) => {
       const temp = [...members]
       temp[index].name = event.target.value
@@ -37,7 +45,7 @@ const Home = () => {
    
     const addMember = () => {
       const temp = [...members]
-      temp.push({name: null, isChecked: false})
+      temp.push({name: null})
       setMembers(temp)
     }
   
@@ -46,43 +54,64 @@ const Home = () => {
       temp.splice(index, 1)
       setMembers(temp)
     }
-  
-    const handleCheckbox = (index) => {
-      const temp = [...members]
-      temp[index].isChecked = !temp[index].isChecked
-      setMembers(temp)
+
+    const makeNullExpense = () => {
+      setAmount('')
+      setBy('')
+      setTo([])
     }
-  
+
+    const makeNullAll = () => {
+      setExpName('')
+      setDate('')
+      setMembers([])
+      setExpenses([])
+    }
+
     const addExpense = (event) => {
       event.preventDefault()
-      const expense = {
+      const newExpense = {
+        amount: Number(amount),
+        by_whom: by_whom,
+        to_whom: to_whom
+      }
+      if(newExpense.amount !== '' && newExpense.by_whom !== '' && newExpense.to_whom.length !== 0 && isNaN(newExpense.amount) === false) {
+        const temp = [...expenses]
+        temp.push(newExpense)
+        setExpenses(temp)
+        makeNullExpense()
+      }
+      else if(isNaN(newExpense.amount) === true) {
+        showMessage(<div id="snackbar">Please enter a valid Amount</div>)
+        makeNullExpense()
+      }
+      else {
+        showMessage(<div id="snackbar">Please enter all the Expense details</div>)
+        makeNullExpense()
+      }
+    }
+  
+    const addExpenses = (event) => {
+      event.preventDefault()
+      const newExpense = {
         expense_name: expName,
         date: date,
         members: members,
-        amount: Number(amt),
-        by_whom: by
+        expenses: expenses
       }
-      if(expense.expense_name !== '' && expense.date !== '' && expense.amount !== '' && expense.by_whom !== '' && expense.members.length !== 0 &&
-        isNaN(expense.amount) !== true) {
-        console.log(isNaN(expense.amount))
-        expenseService.addData(expense)
+      if(newExpense.expense_name !== '' && newExpense.date !== '' && newExpense.members.length !== 0 && newExpense.expenses.length !== 0) {
+        expenseService.addData(newExpense)
         .then(returnedExpense => {
-          setExpenses(expenses.concat(returnedExpense)) 
-          setExpName('')
-          setDate('')
-          setAmt('')
-          setMembers([])
-          setBy('')
+          makeNullAll()
         })
         .catch(error => {
           showMessage(<div id="snackbar">Validation failed, Please verify expense details.</div>)
+          makeNullAll()
         })
-      }
-      else if(isNaN(expense.amount) === true) {
-        showMessage(<div id="snackbar">Please enter a valid Amount</div>)
       }
       else {
         showMessage(<div id="snackbar">Please enter all the details</div>)
+        makeNullAll()
       }
     } 
 
@@ -90,12 +119,11 @@ const Home = () => {
         <center>
             <Notification msg={message} />
             
-            <ExpenseForm ExpName={handleExpName} date={handleDate} Amount={handleAmount} Member={handleMember} addExpense={addExpense} addMember={addMember} 
-              rmMember={removeMember} members={members} expenseName={expName} dateValue={date} amt={amt} radio={handleRadio} checkbox={handleCheckbox}/>
+            <ExpenseForm handleExpName={handleExpName} expName={expName} handleDate={handleDate} date={date} handleMember={handleMember} addMember={addMember} 
+            removeMember={removeMember} members={members} addExpense={addExpense} addExpenses={addExpenses} handleAmount={handleAmount} amount={amount} handleRadio={handleRadio} 
+            handleCheckbox={handleCheckbox} />
             
-            <footer className="bottom">
-              <Link to="/about">about</Link>
-            </footer>
+            <footer className="bottom"><Link to="/about">about</Link></footer>
         </center>       
     )
 }

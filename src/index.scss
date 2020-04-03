@@ -1,5 +1,7 @@
 $Blue-Grotto: #60A3D9;
 $Navy-Blue: #003B73;
+$Pale-Blue: #90caf9;
+$Another-Blue: #0D47A1;
 $light-grey: #e0e0e0;
 body {
     padding-top: 125px;
@@ -27,6 +29,9 @@ body {
     }
     .btn {
         width: fit-content;
+        background-color: $Navy-Blue;
+        border-color: $Navy-Blue;
+        margin: 5px;
     }
     .logos {
         .node{
@@ -124,32 +129,50 @@ body {
     .split {
         padding-top: 80px;
         .card {
-            background-color: $Blue-Grotto;
+            background-color: $Pale-Blue;
             padding: 10px 30px;
             width: fit-content;
             color: white;
             h4 {
-                padding: 10px;
-                color: $Navy-Blue;
+                width: fit-content;
+                background-color: $Another-Blue;
+                border-radius: 50px;
+                display: flex;
+            }
+            .one {
+                padding: 5px 15px;
+            }
+            .two {
+                padding: 5px 13px;
+            }
+            .three {
+                padding: 5px 13px;
             }
             .form-control {
-                border-color: black;
                 margin: 5px;
             }
             .minusBtn {
                 height: fit-content;
-                margin-top: 5px;
-                background-color: $Navy-Blue;
+                margin-top: 10px;
+                color: $Navy-Blue;
+                cursor: pointer;
             }
             .addBtn {
-                background-color: $Navy-Blue;
+                color: $Navy-Blue;
+                cursor: pointer;
+                margin: 5px;
+                font-size: 25px;
             }
         }
         .split_btn {
             margin: 30px;
             letter-spacing: 1px;
-            background-color: $Navy-Blue;
+            background-color: Blue;
+            border-color: Blue;
         }
+    }
+    .addPerson {
+        display: flex;
     }
     .bottom {
         padding-top: 8%;

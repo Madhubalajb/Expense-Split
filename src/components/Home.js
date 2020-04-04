@@ -2,17 +2,22 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ExpenseForm from './ExpenseForm'
 import Notification from './Notification'
+import NewExpenseModal from './NewExpenseModal'
 import expenseService from '../services/expense-split'
 
 const Home = () => {
+    const [message, setMessage] = useState('')
     const [expName, setExpName] = useState('')
     const [date, setDate] = useState('')
     const [amount, setAmount] = useState('')
     const [by_whom, setBy] = useState('')
-    const [to_whom, setTo] = useState([{name: null, isChecked: false}])
+    const [to_whom, setTo] = useState([])
     const [members, setMembers] = useState([{name: null}, {name: null}])
-    const [expenses, setExpenses] = useState([{amount: null, by_whom: null, to_whom: [{name: null, isChecked: false}]}])
-    const [message, setMessage] = useState('')
+    const [expenses, setExpenses] = useState([])
+    const [newExpModal, setModalUp] = useState(true)
+
+    const handleModalUp = () => setModalUp(true)
+    const handleModalDown = () => setModalUp(false)
 
     const handleExpName = (event) => setExpName(event.target.value)
     const handleDate = (event) => setDate(event.target.value)
@@ -66,6 +71,7 @@ const Home = () => {
       setDate('')
       setMembers([])
       setExpenses([])
+      makeNullExpense()
     }
 
     const addExpense = (event) => {
@@ -75,23 +81,25 @@ const Home = () => {
         by_whom: by_whom,
         to_whom: to_whom
       }
-      if(newExpense.amount !== '' && newExpense.by_whom !== '' && newExpense.to_whom.length !== 0 && isNaN(newExpense.amount) === false) {
+      if(newExpense.amount !== 0 && newExpense.by_whom !== '' && newExpense.to_whom.length !== 0 && isNaN(newExpense.amount) === false) {
         const temp = [...expenses]
         temp.push(newExpense)
         setExpenses(temp)
         makeNullExpense()
+        if (newExpModal)
+          handleModalDown()
+        else
+          handleModalUp()
       }
       else if(isNaN(newExpense.amount) === true) {
         showMessage(<div id="snackbar">Please enter a valid Amount</div>)
-        makeNullExpense()
       }
       else {
         showMessage(<div id="snackbar">Please enter all the Expense details</div>)
-        makeNullExpense()
       }
     }
   
-    const addExpenses = (event) => {
+    const splitExpenses = (event) => {
       event.preventDefault()
       const newExpense = {
         expense_name: expName,
@@ -119,9 +127,12 @@ const Home = () => {
         <center>
             <Notification msg={message} />
             
-            <ExpenseForm handleExpName={handleExpName} expName={expName} handleDate={handleDate} date={date} handleMember={handleMember} addMember={addMember} 
-            removeMember={removeMember} members={members} addExpense={addExpense} addExpenses={addExpenses} handleAmount={handleAmount} amount={amount} handleRadio={handleRadio} 
-            handleCheckbox={handleCheckbox} />
+            <ExpenseForm handleExpName={handleExpName} expName={expName} handleDate={handleDate} date={date} handleMember={handleMember} 
+            addMember={addMember} removeMember={removeMember} members={members} addExpense={addExpense} splitExpenses={splitExpenses} 
+            handleAmount={handleAmount} amount={amount} handleRadio={handleRadio} handleCheckbox={handleCheckbox} />
+
+            <NewExpenseModal show={newExpModal} Close={handleModalDown} addExpense={addExpense} members={members} amount={amount} 
+            handleAmount={handleAmount} handleRadio={handleRadio} handleCheckbox={handleCheckbox} />
             
             <footer className="bottom"><Link to="/about">about</Link></footer>
         </center>       

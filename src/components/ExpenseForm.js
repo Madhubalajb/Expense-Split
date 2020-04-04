@@ -6,7 +6,7 @@ const ExpenseForm = (props) => {
 
  return (
     <Container className="split">
-        <Form onSubmit={props.addExpenses} >
+        <Form onSubmit={props.splitExpenses} >
             <Row>
                 <Col>
                     <Card>
@@ -44,9 +44,9 @@ const ExpenseForm = (props) => {
                         {
                             props.members.map((member,index) => {
                                 return(
-                                    <div key={index}>
-                                        <Col><Form.Check type="radio" value={member.name || ""} label={member.name} onChange={props.handleRadio}/></Col>
-                                    </div>
+                                    <Col key={index}>
+                                        <Form.Check type="radio" value={member.name || ""} label={member.name} onChange={props.handleRadio} />
+                                    </Col>
                                 )
                             })
                         }
@@ -57,14 +57,14 @@ const ExpenseForm = (props) => {
                         {
                             props.members.map((member,index) => {
                                 return(
-                                    <div key={index}>
-                                        <Col><Form.Check type="checkbox" value={member.name || ""} label={member.name} onChange={() => props.handleCheckbox(index)}/></Col>
-                                    </div>
+                                    <Col key={index}>
+                                        <Form.Check type="checkbox" value={member.name || ""} label={member.name} onChange={() => props.handleCheckbox(index)}/>
+                                    </Col>
                                 )
                             })
                         }
                         </Row>
-                        <Button title="add more expense" onClick={(event) => props.addExpense(event)}>Add more expense</Button>
+                        <Button title="add more expense" onClick={(event) => props.addExpense(event)}>Add more Expense</Button>
                     </Card>
                 </Col>
                 <Col>

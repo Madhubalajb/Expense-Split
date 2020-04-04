@@ -33,6 +33,21 @@ body {
         border-color: $Navy-Blue;
         margin: 10px;
     }
+    .newExpModal {
+        display: flex;
+        .modal-content {
+            background-color: $Pale-Blue;
+            color: white;
+            .modal-header {
+                color: $Navy-Blue;
+            }
+            .by-to {
+                color: $Navy-Blue;
+                margin: 10px 5px;
+                font-weight: 600;
+            }
+        }
+    }
     .logos {
         .node{
             img {

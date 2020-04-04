@@ -99,7 +99,8 @@ const UserService = () => {
                 <LoginModal show={loginModal} Close={handleLoginNoModal} username={handleUsername} pwd={handlePassword} login={handleLogin}/>
     
                 <Nav.Link onClick={handleSignupModal}><b>Sign <span className="foo">Up</span></b></Nav.Link>
-                <SignupModal show={signupModal} Close={handleSignupNoModal} name={handleName} username={handleUsername} pwd={handlePassword} signup={handleSignup}/>              
+                <SignupModal show={signupModal} Close={handleSignupNoModal} name={handleName} username={handleUsername} pwd={handlePassword} 
+                signup={handleSignup}/>              
             </div>
         )
     }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Row, Col, Container } from 'react-bootstrap'
+import InfoCard from './InfoCard'
 import ExpenseForm from './ExpenseForm'
 import Notification from './Notification'
 import NewExpenseModal from './NewExpenseModal'
@@ -14,8 +15,16 @@ const Home = () => {
     const [to_whom, setTo] = useState([])
     const [members, setMembers] = useState([{name: null}, {name: null}])
     const [expenses, setExpenses] = useState([])
-    const [newExpModal, setModalUp] = useState(true)
 
+    const [firstCard, setFirst] = useState(false)
+    const [secondCard, setSecond] = useState(false)
+    const [thirdCard, setThird] = useState(false)
+
+    const handleFirst = () => setFirst(true)
+    const handleSecond = () => setSecond(true)
+    const handleThird = () => setThird(true)
+
+    const [newExpModal, setModalUp] = useState(false)   
     const handleModalUp = () => setModalUp(true)
     const handleModalDown = () => setModalUp(false)
 
@@ -124,18 +133,27 @@ const Home = () => {
     } 
 
     return (
-        <center>
+        <Container className="home">
             <Notification msg={message} />
-            
-            <ExpenseForm handleExpName={handleExpName} expName={expName} handleDate={handleDate} date={date} handleMember={handleMember} 
-            addMember={addMember} removeMember={removeMember} members={members} addExpense={addExpense} splitExpenses={splitExpenses} 
-            handleAmount={handleAmount} amount={amount} handleRadio={handleRadio} handleCheckbox={handleCheckbox} />
 
             <NewExpenseModal show={newExpModal} Close={handleModalDown} addExpense={addExpense} members={members} amount={amount} 
-            handleAmount={handleAmount} handleRadio={handleRadio} handleCheckbox={handleCheckbox} />
+                        handleAmount={handleAmount} handleRadio={handleRadio} handleCheckbox={handleCheckbox} />
             
-            <footer className="bottom"><Link to="/about">about</Link></footer>
-        </center>       
+            <Row>
+              <Col sm={10}>
+                  <ExpenseForm handleExpName={handleExpName} expName={expName} handleDate={handleDate} date={date} 
+                        handleMember={handleMember} addMember={addMember} removeMember={removeMember} members={members} 
+                        addExpense={addExpense} splitExpenses={splitExpenses} handleAmount={handleAmount} amount={amount} 
+                        handleRadio={handleRadio} handleCheckbox={handleCheckbox} handleFirst={handleFirst}
+                        handleSecond={handleSecond} handleThird={handleThird} />
+              </Col>
+
+              <Col sm={2}>
+                <InfoCard expName={expName} date={date} members={members} expenses={expenses} 
+                        firstCard={firstCard} secondCard={secondCard} thirdcard={thirdCard} />
+              </Col>
+            </Row>
+        </Container>       
     )
 }
 

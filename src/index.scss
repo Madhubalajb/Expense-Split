@@ -27,6 +27,9 @@ body {
             }
         }
     }
+    .infoCard {
+        background-color: $Pale-Blue;
+    }
     .btn {
         width: fit-content;
         background-color: $Navy-Blue;
@@ -34,7 +37,6 @@ body {
         margin: 10px;
     }
     .newExpModal {
-        display: flex;
         .modal-content {
             background-color: $Pale-Blue;
             color: white;
@@ -152,7 +154,6 @@ body {
                 width: fit-content;
                 background-color: $Another-Blue;
                 border-radius: 50px;
-                display: flex;
             }
             .one {
                 padding: 5px 15px;
@@ -175,7 +176,7 @@ body {
             .addBtn {
                 color: $Navy-Blue;
                 cursor: pointer;
-                margin: 5px;
+                margin-top: 15px;
                 font-size: 25px;
             }
         }

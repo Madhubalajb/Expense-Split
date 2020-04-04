@@ -10,16 +10,16 @@ const ExpenseForm = (props) => {
             <Row>
                 <Col>
                     <Card>
-                        <h4 className="one">1</h4>
+                        <center><h4 className="one">1</h4></center>
                         <Form.Control onChange={props.handleExpName} value={props.expName || ""} placeholder="C'mon Name it" required/>
                         <Form.Control onChange={props.handleDate} value={props.date} type="date" required/>
-                        <Button title="Name your thing">Make your 1st step</Button>
+                        <center><Button title="Name your thing" onClick={props.handleFirst}>Make your 1st step</Button></center>
                     </Card>
                 </Col>
 
                 <Col>
                     <Card>
-                        <h4 className="two">2</h4>
+                        <center><h4 className="two">2</h4></center>
                         {
                             props.members.map((member,index) => {
                                 return (
@@ -30,14 +30,16 @@ const ExpenseForm = (props) => {
                                 )
                             })
                         }
-                        <i className="material-icons addBtn" title="add member" onClick={(event) => props.addMember(event)}>add_circle</i>
-                        <Button>Make your Group</Button>
+                        <center>
+                            <i className="material-icons addBtn" title="add member" onClick={(event) => props.addMember(event)}>add_circle</i>
+                        </center>
+                        <center><Button title="form group" onClick={props.handleSecond}>Make your Group</Button></center>
                     </Card>
                 </Col>
 
                 <Col>
                     <Card>
-                        <h4 className="three">3</h4>
+                        <center><h4 className="three">3</h4></center>
                         <Form.Control onChange={props.handleAmount} value={props.amount || ""} placeholder="Amount" required/>
                         <Row style={{color: "#003B73", fontWeight: 600}}>By whom</Row> 
                         <Row>
@@ -51,7 +53,6 @@ const ExpenseForm = (props) => {
                             })
                         }
                         </Row>
-
                         <Row style={{color: "#003B73", fontWeight: 600}}>To whom</Row>
                         <Row>
                         {
@@ -64,12 +65,10 @@ const ExpenseForm = (props) => {
                             })
                         }
                         </Row>
-                        <Button title="add more expense" onClick={(event) => props.addExpense(event)}>Add more Expense</Button>
-                    </Card>
-                </Col>
-                <Col>
-                    <Card>
-
+                        <center>
+                            <i className="material-icons addBtn" title="add more expense" onClick={(event) => props.addExpense(event)}>add_circle</i>
+                        </center>
+                        <center><Button title="add more expense" onClick={props.handleThird}>Add the Expense</Button></center>
                     </Card>
                 </Col>
             </Row>

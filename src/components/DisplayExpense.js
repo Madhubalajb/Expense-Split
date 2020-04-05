@@ -47,7 +47,7 @@ const DisplayExpense = () => {
                         <div>
                             <div className="flexDisplay">
                                 <h4>{expense.expense_name}</h4>
-                                <span>
+                                <span className="tools">
                                     <i className="material-icons edit" title="Edit" onClick={handleEditExpense}>edit</i>
                                     <i className="material-icons delete" title="delete" onClick={() => handleRemoveExpense(expense)}>delete</i>
                                 </span>

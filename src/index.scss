@@ -2,6 +2,7 @@ $Blue-Grotto: #60A3D9;
 $Navy-Blue: #003B73;
 $Pale-Blue: #90caf9;
 $Another-Blue: #0D47A1;
+$infoCard-Blue: #3949ab;
 $light-grey: #e0e0e0;
 body {
     padding-top: 125px;
@@ -28,7 +29,48 @@ body {
         }
     }
     .infoCard {
-        background-color: $Pale-Blue;
+        background-color: $infoCard-Blue;
+        height: fit-content;
+        margin: 70px 20px;
+        padding: 10px 10px;
+        color: lightsteelblue;
+        .expNumber {
+            background-color: skyblue;
+            border-radius: 50px;
+            padding: 5px;
+        }
+        .round {
+            background-color: white;
+            color: $Navy-Blue;
+            border-radius: 50px;
+            font-weight: 600;
+            padding: 0px 7px;
+            margin-right: 10px;
+        }
+        .blocks {
+            margin: 10px;
+        }
+        .flexDisplay {
+            display: flex;
+        }
+        hr {
+            margin: 10px;
+            border-top: 1px solid #03A9F4;
+        }
+        h4, h6, .white{
+            color: white;
+        }
+        .empty {
+            margin: auto;
+            padding: 10px;
+        }
+        .calendar, .person {
+            margin-right: 10px;
+            color: white;
+        }
+        span {
+            margin: 0px 5px;
+        }
     }
     .btn {
         width: fit-content;

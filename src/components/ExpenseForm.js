@@ -1,8 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Container, Row, Col, Card, Button, Form} from 'react-bootstrap'
 
 const ExpenseForm = (props) => {
+    const [selectedRadio, setSelectedRadio] = useState('')
 
+    const handleSelectedRadio = (event) => setSelectedRadio(event.target.value ) 
+
+    const handleRadio = (event) => {
+        props.handleRadio(event)
+        handleSelectedRadio(event)
+    }
 
  return (
     <Container className="split">
@@ -13,7 +20,7 @@ const ExpenseForm = (props) => {
                         <center><h4 className="one">1</h4></center>
                         <Form.Control onChange={props.handleExpName} value={props.expName || ""} placeholder="C'mon Name it" required/>
                         <Form.Control onChange={props.handleDate} value={props.date} type="date" required/>
-                        <center><Button title="Name your thing" onClick={props.handleFirst}>Make your 1st step</Button></center>
+                        <center><Button title="Name your thing" onClick={props.handleFirst}>Name your thing</Button></center>
                     </Card>
                 </Col>
 
@@ -25,7 +32,7 @@ const ExpenseForm = (props) => {
                                 return (
                                     <div className="addPerson" key={index}>
                                         <Form.Control value={member.name || ""} placeholder="Person Name" onChange={(event) => props.handleMember(event, index)} />
-                                        <i className="material-icons minusBtn" title="delete member" onClick={() => props.removeMember(index)}>delete </i>
+                                        <i className="material-icons minusBtn" title="delete member" onClick={() => props.removeMember(index)}>delete</i>
                                     </div>
                                 )
                             })
@@ -33,7 +40,7 @@ const ExpenseForm = (props) => {
                         <center>
                             <i className="material-icons addBtn" title="add member" onClick={(event) => props.addMember(event)}>add_circle</i>
                         </center>
-                        <center><Button title="form group" onClick={props.handleSecond}>Make your Group</Button></center>
+                        <center><Button title="form group" onClick={props.handleSecond}>Make your group</Button></center>
                     </Card>
                 </Col>
 
@@ -47,7 +54,8 @@ const ExpenseForm = (props) => {
                             props.members.map((member,index) => {
                                 return(
                                     <Col key={index}>
-                                        <Form.Check type="radio" value={member.name || ""} label={member.name} onChange={props.handleRadio} />
+                                        <Form.Check type="radio" checked={selectedRadio === member.name} value={member.name || ""} 
+                                        label={member.name} onChange={(event) => handleRadio(event)} />
                                     </Col>
                                 )
                             })
@@ -59,20 +67,21 @@ const ExpenseForm = (props) => {
                             props.members.map((member,index) => {
                                 return(
                                     <Col key={index}>
-                                        <Form.Check type="checkbox" value={member.name || ""} label={member.name} onChange={() => props.handleCheckbox(index)}/>
+                                        <Form.Check type="checkbox" value={member.name || ""} label={member.name} 
+                                            onChange={(event) => props.handleCheckbox(event, index)}/>
                                     </Col>
                                 )
                             })
                         }
                         </Row>
                         <center>
-                            <i className="material-icons addBtn" title="add more expense" onClick={(event) => props.addExpense(event)}>add_circle</i>
+                            <i className="material-icons addBtn" title="add more expense" onClick={(event) => props.addExpenseModal(event)}>add_circle</i>
                         </center>
-                        <center><Button title="add more expense" onClick={props.handleThird}>Add the Expense</Button></center>
+                        <center><Button title="add the expenses" onClick={props.addExpenseToInfoCard}>Add the expenses</Button></center>
                     </Card>
                 </Col>
             </Row>
-            <Button title="Split" className="split_btn" type="submit">Finally, SPLIT</Button>
+            <center><Button title="Split the expenses" className="split_btn" type="submit">Finally, SPLIT</Button></center>
         </Form>
     </Container>
  )

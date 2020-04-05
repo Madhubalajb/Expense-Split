@@ -1,26 +1,52 @@
 import React from 'react'
-import { Card, Row, Col } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 
 const InfoCard = (props) => {
-    const empty = () => (
-        <p>Please proceed with the three steps to split your expenses.</p>
+    const IsFirstCardUp = props.firstCard
+    const IsSecondCardUp = props.secondCard
+    const IsThirdCardUp = props.thirdCard
+
+    const allEmpty = () => (
+        <div className="empty">
+            <p>Please proceed with the three steps to split your expenses.</p> 
+            <p><span className="round">1</span>Name your thing</p>
+            <p><span className="round">2</span>Make your group</p>
+            <p><span className="round">3</span>Add your expenses</p>
+        </div>
+    )
+
+    const twoMoreSteps = () => (
+        <div className="empty">
+            <p>C'mon two more steps to go...</p> 
+            <p><span className="round">2</span>Make your group</p>
+            <p><span className="round">3</span>Add your expenses</p>
+        </div>        
+    )
+
+    const oneMoreStep = () => (
+         <div className="empty">
+            <p>Almost there! one more to go</p> 
+            <p><span className="round">3</span>Add your expenses</p>
+        </div>        
     )
 
     const first = () => (
-        <Row>
-            <Col><h6>{props.expName}</h6></Col>
-            <Col><i className="material-icons">calendar_today</i>{props.date}</Col>
-        </Row>
+        <div>
+            <center><h4>{props.expName}</h4></center>
+            <div className="flexDisplay blocks">
+                <i className="material-icons calendar">event</i><span>{new Date(props.date).toDateString()}</span>
+            </div>
+        </div>
     )
 
     const second = () => (
-        <div>
+        <div className="blocks">
             <h6>Your Group</h6>
             {
                 props.members.map((member, index) => {
                     return (
-                        <div key={index}>
-                            <i className="material-icons">person</i> {member.name}
+                        <div key={index} className="flexDisplay">
+                            <i className="material-icons person">person</i><span>{member.name}</span>
                         </div>
                     )
                 })
@@ -29,17 +55,29 @@ const InfoCard = (props) => {
     )
 
     const third = () => {
-        const to = props.expenses.to_whom.filter(to => to.isChecked === true)
         return (
-            <div>
+            <div className="blocks">
                 <h6>Expenses</h6>
                 {
                     props.expenses.map((expense, index) => {
+                        let to = expense.to_whom.filter(to => to.isChecked === true)
                         return (
-                            <div key={index}>
-                                {index + 1} <i className="material-icons">attach_money</i>{expense.amount}
-                                <p>By {expense.by_whom}</p>
-                                <p>To {to.map(to => to.name)}</p>
+                            <div className="blocks" key={index}>
+                                <div className="flexDisplay">
+                                    <i className="material-icons white">navigate_next</i>
+                                    <span className="white">Amount -</span>
+                                    <span>{expense.amount}</span>
+                                </div> 
+                                <div>
+                                    <span className="white">By -</span> 
+                                    <span>{expense.by_whom}</span>
+                                </div>
+                                <div>
+                                    <span className="white">To -</span> 
+                                    {
+                                        to.map((to, index) => <span key={index}>{to.name}</span>)
+                                    }
+                                </div>
                             </div>
                         )
                     })
@@ -48,37 +86,44 @@ const InfoCard = (props) => {
         )
     }
 
-    if (props.firstCard === true && props.secondCard === true && props.thirdCard === true) {
+    if (IsFirstCardUp && IsSecondCardUp && IsThirdCardUp) {
         return (
             <Card className="infoCard">
-                <Row>{first()}</Row>
-                <Row>{second()}</Row>
-                <Row>{third()}</Row>
+                {first()}
+                <hr/>
+                {second()}
+                <hr/>
+                {third()}
             </Card>
         )
     }
-    else if (props.firstCard === true && props.secondCard === true && props.thirdCard === false) {
+    else if (IsFirstCardUp && IsSecondCardUp && !IsThirdCardUp) {
       return (
             <Card className="infoCard">
-                <Row>{first()}</Row>
-                <Row>{second()}</Row>
+                {first()}
+                <hr/>
+                {second()}
+                <hr/>
+                {oneMoreStep()}
             </Card>
         )
     }
-    else if (props.firstCard === true && props.secondCard === false && props.thirdCard === false) {
+    else if (IsFirstCardUp && !IsSecondCardUp && !IsThirdCardUp) {
         return (
             <Card className="infoCard">
-               <Row>{first()}</Row>
+                {first()}
+                <hr/>
+                {twoMoreSteps()}
             </Card>
         )
     }
-    else {
+    else if (!IsFirstCardUp && !IsSecondCardUp && !IsThirdCardUp) {
         return (
             <Card className="infoCard">
-                {empty()}
+                {allEmpty()}
             </Card>
-        )        
-    }
+        )           
+    }  
 }
 
 export default InfoCard

@@ -12,34 +12,28 @@ const Home = () => {
     const [date, setDate] = useState('')
     const [amount, setAmount] = useState('')
     const [by_whom, setBy] = useState('')
-    const [to_whom, setTo] = useState([])
+    const [to_whom, setTo] = useState([{name: null, isChecked: false}, {name: null, isChecked: false}])
     const [members, setMembers] = useState([{name: null}, {name: null}])
     const [expenses, setExpenses] = useState([])
-
     const [firstCard, setFirst] = useState(false)
     const [secondCard, setSecond] = useState(false)
     const [thirdCard, setThird] = useState(false)
+    const [newExpModal, setModalUp] = useState(false) 
+    const [isExpenseAdded, setExpenseAdded] = useState(false)  
 
     const handleFirst = () => setFirst(true)
     const handleSecond = () => setSecond(true)
     const handleThird = () => setThird(true)
-
-    const [newExpModal, setModalUp] = useState(false)   
     const handleModalUp = () => setModalUp(true)
     const handleModalDown = () => setModalUp(false)
-
     const handleExpName = (event) => setExpName(event.target.value)
     const handleDate = (event) => setDate(event.target.value)
     const handleAmount = (event) => setAmount(event.target.value)
     const handleRadio = (event) => setBy(event.target.value)
 
-    const handleCheckbox = (index) => {
-        const temp = members.map(member => {
-           return {
-                name: member.name,
-                isChecked: false
-            }
-        })
+    const handleCheckbox = (event, index) => {
+        const temp = [...to_whom]
+        temp[index].name = event.target.value
         temp[index].isChecked = !temp[index].isChecked
         setTo(temp)
     }
@@ -55,12 +49,20 @@ const Home = () => {
       const temp = [...members]
       temp[index].name = event.target.value
       setMembers(temp)
+      
+      const temp1 = [...to_whom]
+      temp1[index].name = event.target.value
+      setTo(temp1)      
     }
    
     const addMember = () => {
       const temp = [...members]
       temp.push({name: null})
       setMembers(temp)
+
+      const temp1 = [...to_whom]
+      temp.push({name: null, isChecked: false})
+      setTo(temp1)
     }
   
     const removeMember = (index) => {
@@ -72,19 +74,18 @@ const Home = () => {
     const makeNullExpense = () => {
       setAmount('')
       setBy('')
-      setTo([])
+      setTo([{name: null, isChecked: false}, {name: null, isChecked: false}])
     }
 
     const makeNullAll = () => {
       setExpName('')
       setDate('')
-      setMembers([])
+      setMembers([{name: null}, {name: null}])
       setExpenses([])
       makeNullExpense()
     }
 
-    const addExpense = (event) => {
-      event.preventDefault()
+    const addExpense = () => {
       const newExpense = {
         amount: Number(amount),
         by_whom: by_whom,
@@ -94,17 +95,35 @@ const Home = () => {
         const temp = [...expenses]
         temp.push(newExpense)
         setExpenses(temp)
+        setExpenseAdded(true)
         makeNullExpense()
-        if (newExpModal)
-          handleModalDown()
-        else
-          handleModalUp()
       }
       else if(isNaN(newExpense.amount) === true) {
         showMessage(<div id="snackbar">Please enter a valid Amount</div>)
       }
       else {
         showMessage(<div id="snackbar">Please enter all the Expense details</div>)
+      }
+    }
+
+    const addExpenseModal = (event) => {
+      event.preventDefault()
+      addExpense()
+      if(newExpModal)
+        handleModalDown()
+      else
+        handleModalUp()
+    }
+
+    const addExpenseToInfoCard = () => {
+      if(isExpenseAdded) {
+        handleThird()
+        setExpenseAdded(false)
+      }
+      else {
+        addExpense()
+        handleThird()
+        setExpenseAdded(false)
       }
     }
   
@@ -136,21 +155,21 @@ const Home = () => {
         <Container className="home">
             <Notification msg={message} />
 
-            <NewExpenseModal show={newExpModal} Close={handleModalDown} addExpense={addExpense} members={members} amount={amount} 
-                        handleAmount={handleAmount} handleRadio={handleRadio} handleCheckbox={handleCheckbox} />
+            <NewExpenseModal show={newExpModal} Close={handleModalDown} addExpenseModal={addExpenseModal} members={members} 
+                    amount={amount} handleAmount={handleAmount} handleRadio={handleRadio} handleCheckbox={handleCheckbox} />
             
             <Row>
-              <Col sm={10}>
-                  <ExpenseForm handleExpName={handleExpName} expName={expName} handleDate={handleDate} date={date} 
+              <Col sm={9}>
+                <ExpenseForm handleExpName={handleExpName} expName={expName} handleDate={handleDate} date={date} 
                         handleMember={handleMember} addMember={addMember} removeMember={removeMember} members={members} 
-                        addExpense={addExpense} splitExpenses={splitExpenses} handleAmount={handleAmount} amount={amount} 
-                        handleRadio={handleRadio} handleCheckbox={handleCheckbox} handleFirst={handleFirst}
-                        handleSecond={handleSecond} handleThird={handleThird} />
+                        addExpenseModal={addExpenseModal} splitExpenses={splitExpenses} handleAmount={handleAmount} 
+                        amount={amount} handleRadio={handleRadio} handleCheckbox={handleCheckbox} handleFirst={handleFirst}
+                        handleSecond={handleSecond} handleThird={handleThird} addExpenseToInfoCard={addExpenseToInfoCard} />
               </Col>
 
-              <Col sm={2}>
+              <Col sm={3}>
                 <InfoCard expName={expName} date={date} members={members} expenses={expenses} 
-                        firstCard={firstCard} secondCard={secondCard} thirdcard={thirdCard} />
+                        firstCard={firstCard} secondCard={secondCard} thirdCard={thirdCard} />
               </Col>
             </Row>
         </Container>       

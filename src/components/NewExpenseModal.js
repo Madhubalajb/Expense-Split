@@ -1,12 +1,21 @@
-import React from'react'
+import React, {useState} from'react'
 import { Modal, Form, Row, Col, Button} from 'react-bootstrap'
 
 const NewExpenseModal = (props) => {
+    const [selectedRadio, setSelectedRadio] = useState('')
+
+    const handleSelectedRadio = (event) => setSelectedRadio(event.target.value ) 
+
+    const handleRadio = (event) => {
+        props.handleRadio(event)
+        handleSelectedRadio(event)
+    }
+
     return (
         <Modal className="newExpModal" show={props.show} onHide={props.Close}>
             <Modal.Header closeButton><h5>Enter the new Expense details</h5></Modal.Header>
             <Modal.Body>
-                <Form onSubmit={props.addExpense}>
+                <Form onSubmit={props.addExpenseModal}>
                     <Form.Control placeholder="Amount" onChange={props.handleAmount} value={props.amount || ''} required />
                     
                     <Row className="by-to">By whom</Row>
@@ -15,7 +24,8 @@ const NewExpenseModal = (props) => {
                         props.members.map((member,index) => {
                             return (
                                 <Col key={index}>
-                                    <Form.Check type="radio" value={member.name || ''} label={member.name} onChange={props.handleRadio} />
+                                    <Form.Check type="radio" checked={selectedRadio === member.name} value={member.name || ''} 
+                                        label={member.name} onChange={(event) => handleRadio(event)} />
                                 </Col>
                             )
                         })
@@ -28,7 +38,8 @@ const NewExpenseModal = (props) => {
                         props.members.map((member,index) => {
                             return (
                                 <Col key={index}>
-                                    <Form.Check type="checkbox" value={member.name || ''} label={member.name} onChange={() => props.handleCheckbox(index)} />
+                                    <Form.Check type="checkbox" value={member.name || ''} label={member.name} 
+                                        onChange={(event) => props.handleCheckbox(event, index)} />
                                 </Col>
                             )
                         })

@@ -5,7 +5,7 @@ import expenseService from '../services/expense-split'
 
 const DisplayExpense = () => {
     const [expenses, setExpenses] = useState([])
-    const [message, setMessage] = use('')
+    const [message, setMessage] = useState('')
 
     useEffect(() => {
         const loggedUser = window.localStorage.getItem('logged-Expense-Split-User')
@@ -26,7 +26,7 @@ const DisplayExpense = () => {
         let hi
     }
 
-    const handleRemoveExpense = (expense) => {
+    const handleRemoveExpense = async (expense) => {
         let check = window.confirm('Wanna delete?')
         if(check) {
             await expenseService.deleteData(expense.id) 
@@ -45,10 +45,10 @@ const DisplayExpense = () => {
                 <Col>
                     <Card className="infoCard" key={index}>
                         <div>
-                            <div>
+                            <div className="flexDisplay">
                                 <h4>{expense.expense_name}</h4>
-                                <i className="material-icons edit" onClick={handleEditExpense}>edit</i>
-                                <i className="material-icons delete" onClick={() => handleRemoveExpense(expense)}>delete</i>
+                                <i className="material-icons edit" title="Edit" onClick={handleEditExpense}>edit</i>
+                                <i className="material-icons delete" title="delete" onClick={() => handleRemoveExpense(expense)}>delete</i>
                             </div>
                             <div className="flexDisplay blocks">
                                 <i className="material-icons calendar">event</i><span>{new Date(expense.date).toDateString()}</span>
@@ -102,6 +102,7 @@ const DisplayExpense = () => {
    
     return (
         <Container>
+            <Notification msg={message} />
             <Row className="row-cols-4">
                 {showExpense()}  
             </Row>

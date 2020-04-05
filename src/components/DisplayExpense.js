@@ -47,8 +47,10 @@ const DisplayExpense = () => {
                         <div>
                             <div className="flexDisplay">
                                 <h4>{expense.expense_name}</h4>
-                                <i className="material-icons edit" title="Edit" onClick={handleEditExpense}>edit</i>
-                                <i className="material-icons delete" title="delete" onClick={() => handleRemoveExpense(expense)}>delete</i>
+                                <span>
+                                    <i className="material-icons edit" title="Edit" onClick={handleEditExpense}>edit</i>
+                                    <i className="material-icons delete" title="delete" onClick={() => handleRemoveExpense(expense)}>delete</i>
+                                </span>
                             </div>
                             <div className="flexDisplay blocks">
                                 <i className="material-icons calendar">event</i><span>{new Date(expense.date).toDateString()}</span>

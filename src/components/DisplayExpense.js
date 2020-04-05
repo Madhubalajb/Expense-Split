@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react'
 import {Container, Row, Col, Card} from 'react-bootstrap'
+import Notification from './Notification'
 import expenseService from '../services/expense-split'
 
 const DisplayExpense = () => {
     const [expenses, setExpenses] = useState([])
+    const [message, setMessage] = use('')
 
     useEffect(() => {
         const loggedUser = window.localStorage.getItem('logged-Expense-Split-User')
@@ -13,12 +15,41 @@ const DisplayExpense = () => {
         }
     }, [])
 
+    const showMessage = (message) => {
+        setMessage(message)
+        setTimeout(() => {
+            setMessage('')
+        }, 3000)
+    }
+
+    const handleEditExpense = () => {
+        let hi
+    }
+
+    const handleRemoveExpense = (expense) => {
+        let check = window.confirm('Wanna delete?')
+        if(check) {
+            await expenseService.deleteData(expense.id) 
+            .then(deleted => {
+                setExpenses(expenses.filter(exp => exp.id !== expense.id))
+                showMessage(<div id="snackbar">Deleted!</div>)
+            })  
+            .catch(error => {
+                showMessage(<div id="snackbar">Couldn't delete {expense.expense_name}</div>)
+            })        
+        }
+    }
+
     const showExpense = () => expenses.map((expense, index) => {
             return(
                 <Col>
                     <Card className="infoCard" key={index}>
                         <div>
-                            <center><h4>{expense.expense_name}</h4></center>
+                            <div>
+                                <h4>{expense.expense_name}</h4>
+                                <i className="material-icons edit" onClick={handleEditExpense}>edit</i>
+                                <i className="material-icons delete" onClick={() => handleRemoveExpense(expense)}>delete</i>
+                            </div>
                             <div className="flexDisplay blocks">
                                 <i className="material-icons calendar">event</i><span>{new Date(expense.date).toDateString()}</span>
                             </div>

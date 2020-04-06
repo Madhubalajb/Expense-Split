@@ -60,13 +60,19 @@ body {
         h4, h6, .white{
             color: white;
         }
+        h4 {
+            padding: 0px 5px;
+        }
         .edit, .delete {
             cursor: pointer;
             color: white;
+            padding: 5px;
         }
         .tools {
             position: absolute;
             right: 0;
+            font-size: 20px;
+            margin: 0px 15px;
         }
         .empty {
             margin: auto;

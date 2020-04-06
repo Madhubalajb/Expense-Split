@@ -86,6 +86,27 @@ const InfoCard = (props) => {
         )
     }
 
+    const calculateExpense = () => {
+        const expensesOfEachMembers = props.members.map(memb => {
+            return {
+                member: memb.name,
+                splittedExp: []
+            }
+        })
+
+        props.expenses.map(expense => {
+            let amount = expense.amount
+            let by = expense.by_whom
+            let to = expense.to_whom.filter(to => to.isChecked === true)
+            let share = amount/to.length
+
+            to.forEach(element => {
+                let found = expensesOfEachMembers.findIndex(foo => foo.member === element.name)
+                expensesOfEachMembers[found].splittedExp.push({to: by, amount: share})
+            })
+        })
+    }
+
     if (IsFirstCardUp && IsSecondCardUp && IsThirdCardUp) {
         return (
             <Card className="infoCard">

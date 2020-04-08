@@ -21,7 +21,7 @@ const Home = () => {
     const [finalCard, setFinal] = useState(false)
     const [newExpModal, setModalUp] = useState(false) 
     const [isExpenseAdded, setExpenseAdded] = useState(false) 
-    const [splitted, setSplitted] = useState('')     
+    const [splitted, setSplitted] = useState([])     
 
     const handleFirst = () => setFirst(true)
     const handleSecond = () => setSecond(true)
@@ -206,18 +206,17 @@ const Home = () => {
         members: members,
         expenses: expenses
       }
-      if(newExpense.expense_name !== '' && newExpense.date !== '' && newExpense.members.length !== 0 && newExpense.expenses.length !== 0) {   
-        calculateExpense(newExpense.expenses) 
-        handleFinal()   
-        //expenseService.addData(newExpense)
-        // .then(returnedExpense => {
-        //   calculateExpense(newExpense.expenses) 
-        //   makeNullAll() 
-        // })
-        // .catch(error => {
-        //   showMessage(<div id="snackbar">Validation failed, Please verify expense details.</div>)
-        //   makeNullAll()
-        // })
+      if(newExpense.expense_name !== '' && newExpense.date !== '' && newExpense.members.length !== 0 && newExpense.expenses.length !== 0) {          
+        expenseService.addData(newExpense)
+        .then(returnedExpense => {
+          calculateExpense(newExpense.expenses)
+          handleFinal()  
+          makeNullAll() 
+        })
+        .catch(error => {
+          showMessage(<div id="snackbar">Validation failed, Please verify expense details.</div>)
+          makeNullAll()
+        })
       }
       else {
         showMessage(<div id="snackbar">Please enter all the details</div>)

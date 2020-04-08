@@ -92,25 +92,27 @@ const InfoCard = (props) => {
             <div className="blocks">
                 <h6>Splitted Expenses</h6>
                 {
-                    props.splitted.forEach((firstItem, firstIndex) => {
-                        return (
-                            <div key={firstIndex}>
-                                {
-                                    firstItem.splittedExp.forEach((secondItem, secondIndex) => {
-                                        return (
-                                            <div key={secondIndex}>
-                                                <span>{firstItem.member }</span><span>{secondItem.amount}</span><span>{secondItem.to}</span>
-                                            </div>
-                                        )
-                                    })                                   
-                                }
-                            </div>
-                        )
-                    })
+                    props.splitted.map((firstItem, firstIndex) => {
+                    return (
+                        <div key={firstIndex}>
+                        {
+                            firstItem.splittedExp.map((secondItem, secondIndex) => {
+                                return (
+                                    <div key={secondIndex} className="flexDisplay">
+                                        <span>{firstItem.member}</span>
+                                        <div className="flexDisplay" style={{color: "white", paddingLeft: "5px", paddingRight: "5px"}}>
+                                            <i className="material-icons">trending_flat</i>
+                                            <span style={{margin: "auto"}}>{secondItem.amount}</span>
+                                        </div>
+                                        <span>{secondItem.to}</span>
+                                    </div>
+                            )})
+                        }
+                        </div>
+                    )})
                 }
             </div>
-        )
-    }
+        )}
 
     if (IsFirstCardUp && IsSecondCardUp && IsThirdCardUp && !IsFinalCardUp) {
         return (

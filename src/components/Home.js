@@ -18,18 +18,21 @@ const Home = () => {
     const [firstCard, setFirst] = useState(false)
     const [secondCard, setSecond] = useState(false)
     const [thirdCard, setThird] = useState(false)
+    const [finalCard, setFinal] = useState(false)
     const [newExpModal, setModalUp] = useState(false) 
-    const [isExpenseAdded, setExpenseAdded] = useState(false)  
+    const [isExpenseAdded, setExpenseAdded] = useState(false) 
+    const [splitted, setSplitted] = useState('')     
 
     const handleFirst = () => setFirst(true)
     const handleSecond = () => setSecond(true)
     const handleThird = () => setThird(true)
+    const handleFinal = () => setFinal(true)
     const handleModalUp = () => setModalUp(true)
     const handleModalDown = () => setModalUp(false)
     const handleExpName = (event) => setExpName(event.target.value)
     const handleDate = (event) => setDate(event.target.value)
     const handleAmount = (event) => setAmount(event.target.value)
-    const handleRadio = (event) => setBy(event.target.value)
+    const handleRadio = (event) => setBy(event.target.value)  
 
     const handleCheckbox = (event, index) => {
         const temp = [...to_whom]
@@ -61,7 +64,7 @@ const Home = () => {
       setMembers(temp)
 
       const temp1 = [...to_whom]
-      temp.push({name: null, isChecked: false})
+      temp1.push({name: null, isChecked: false})
       setTo(temp1)
     }
   
@@ -69,12 +72,19 @@ const Home = () => {
       const temp = [...members]
       temp.splice(index, 1)
       setMembers(temp)
+
+      const temp1 = [...to_whom]
+      temp1.splice(index, 1)
+      setTo(temp1)
     }
 
     const makeNullExpense = () => {
       setAmount('')
       setBy('')
-      setTo([{name: null, isChecked: false}, {name: null, isChecked: false}])
+      const temp = [...to_whom]
+      setTo(temp.map(foo => {
+        return {name: foo.name, isChecked: false}
+      }))
     }
 
     const makeNullAll = () => {
@@ -126,6 +136,67 @@ const Home = () => {
         setExpenseAdded(false)
       }
     }
+    
+    const calculateFurther = (expensesOfEachMembers) => {
+      expensesOfEachMembers.forEach((item, firstIndex) => {
+        let person1 = { name: item.member, amtToGive: 0 }
+        let person2 = { name: null,amtToGive: 0 }
+        let found 
+        let found1
+
+        item.splittedExp.forEach((item, secondIndex) => {
+          person2.name = item.to
+          person1.amtToGive = item.amount
+          found = expensesOfEachMembers.findIndex(item => item.member === person2.name) 
+          
+          if(found !== -1) {
+            found1 = expensesOfEachMembers[found].splittedExp.findIndex(item => item.to === person1.name)
+            if(found1 !== -1) {
+              person2.amtToGive = expensesOfEachMembers[found].splittedExp[found1].amount
+            }
+          }
+          
+          if(person2.amtToGive !== 0 && person1.amtToGive >= person2.amtToGive) {
+            let share = person1.amtToGive - person2.amtToGive
+            if(share === 0) {
+              expensesOfEachMembers[firstIndex].splittedExp.splice(secondIndex, 1)
+              expensesOfEachMembers[found].splittedExp.splice(found1, 1)
+            }
+            else {
+              expensesOfEachMembers[firstIndex].splittedExp[secondIndex].amount = Math.abs(share)
+              expensesOfEachMembers[found].splittedExp.splice(found1, 1)
+            }
+          }
+          else if(person2.amtToGive !== 0 && person1.amtToGive < person2.amtToGive) {
+            let share = person2.amtToGive - person1.amtToGive
+            expensesOfEachMembers[firstIndex].splittedExp.splice(secondIndex, 1)
+            expensesOfEachMembers[found].splittedExp[found1].amount = Math.abs(share)
+          }
+        })
+      })
+      expensesOfEachMembers = expensesOfEachMembers.filter(element => element.splittedExp.length !== 0)
+      setSplitted(expensesOfEachMembers)    
+    }
+
+    const calculateExpense = (expenses) => {
+      const expensesOfEachMembers = members.map(memb => {
+        return { member: memb.name, splittedExp: [] }
+      }) 
+      expenses.map(expense => {
+        let amount = expense.amount
+        let by = expense.by_whom
+        let to = expense.to_whom.filter(to => to.isChecked === true)
+        let share = Math.round(amount/to.length)
+        
+        to.forEach(element => {
+          let found = expensesOfEachMembers.findIndex(foo => (foo.member === element.name && foo.member !== by))
+          if (found !== -1) {
+            expensesOfEachMembers[found].splittedExp.push({to: by, amount: share})
+          }
+        })
+      })
+      calculateFurther(expensesOfEachMembers)        
+     }
   
     const splitExpenses = (event) => {
       event.preventDefault()
@@ -135,15 +206,18 @@ const Home = () => {
         members: members,
         expenses: expenses
       }
-      if(newExpense.expense_name !== '' && newExpense.date !== '' && newExpense.members.length !== 0 && newExpense.expenses.length !== 0) {
-        expenseService.addData(newExpense)
-        .then(returnedExpense => {
-          makeNullAll()
-        })
-        .catch(error => {
-          showMessage(<div id="snackbar">Validation failed, Please verify expense details.</div>)
-          makeNullAll()
-        })
+      if(newExpense.expense_name !== '' && newExpense.date !== '' && newExpense.members.length !== 0 && newExpense.expenses.length !== 0) {   
+        calculateExpense(newExpense.expenses) 
+        handleFinal()   
+        //expenseService.addData(newExpense)
+        // .then(returnedExpense => {
+        //   calculateExpense(newExpense.expenses) 
+        //   makeNullAll() 
+        // })
+        // .catch(error => {
+        //   showMessage(<div id="snackbar">Validation failed, Please verify expense details.</div>)
+        //   makeNullAll()
+        // })
       }
       else {
         showMessage(<div id="snackbar">Please enter all the details</div>)
@@ -155,12 +229,12 @@ const Home = () => {
         <Container className="home">
             <Notification msg={message} />
 
-            <NewExpenseModal show={newExpModal} Close={handleModalDown} addExpenseModal={addExpenseModal} members={members} 
+            <NewExpenseModal show={newExpModal} Close={handleModalDown} addExpenseModal={addExpenseModal} members={members} to_whom={to_whom} 
                     amount={amount} handleAmount={handleAmount} handleRadio={handleRadio} handleCheckbox={handleCheckbox} />
             
             <Row>
               <Col sm={9}>
-                <ExpenseForm handleExpName={handleExpName} expName={expName} handleDate={handleDate} date={date} 
+                <ExpenseForm handleExpName={handleExpName} expName={expName} handleDate={handleDate} date={date} to_whom={to_whom} 
                         handleMember={handleMember} addMember={addMember} removeMember={removeMember} members={members} 
                         addExpenseModal={addExpenseModal} splitExpenses={splitExpenses} handleAmount={handleAmount} 
                         amount={amount} handleRadio={handleRadio} handleCheckbox={handleCheckbox} handleFirst={handleFirst}
@@ -168,8 +242,8 @@ const Home = () => {
               </Col>
 
               <Col sm={3}>
-                <InfoCard expName={expName} date={date} members={members} expenses={expenses} 
-                        firstCard={firstCard} secondCard={secondCard} thirdCard={thirdCard} />
+                <InfoCard expName={expName} date={date} members={members} expenses={expenses} firstCard={firstCard} 
+                      secondCard={secondCard} thirdCard={thirdCard} finalCard={finalCard} splitted={splitted} />
               </Col>
             </Row>
         </Container>       

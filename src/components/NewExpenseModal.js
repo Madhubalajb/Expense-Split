@@ -35,10 +35,10 @@ const NewExpenseModal = (props) => {
                     <Row className="by-to">To whom</Row>
                     <Row>
                     {
-                        props.members.map((member,index) => {
+                        props.to_whom.map((member,index) => {
                             return (
                                 <Col key={index}>
-                                    <Form.Check type="checkbox" value={member.name || ''} label={member.name} 
+                                    <Form.Check type="checkbox" value={member.name || ''} label={member.name} checked={member.isChecked}
                                         onChange={(event) => props.handleCheckbox(event, index)} />
                                 </Col>
                             )

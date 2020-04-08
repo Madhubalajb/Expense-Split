@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Card } from 'react-bootstrap'
 
 const InfoCard = (props) => {
     const IsFirstCardUp = props.firstCard
     const IsSecondCardUp = props.secondCard
     const IsThirdCardUp = props.thirdCard
+    const IsFinalCardUp = props.finalCard
 
     const allEmpty = () => (
         <div className="empty">
@@ -59,8 +60,8 @@ const InfoCard = (props) => {
             <div className="blocks">
                 <h6>Expenses</h6>
                 {
-                    props.expenses.map((expense, index) => {
-                        let to = expense.to_whom.filter(to => to.isChecked === true)
+                    props.expenses.map((expense, index) => { 
+                        let to = expense.to_whom.filter(to => to.isChecked === true)                       
                         return (
                             <div className="blocks" key={index}>
                                 <div className="flexDisplay">
@@ -86,28 +87,32 @@ const InfoCard = (props) => {
         )
     }
 
-    const calculateExpense = () => {
-        const expensesOfEachMembers = props.members.map(memb => {
-            return {
-                member: memb.name,
-                splittedExp: []
-            }
-        })
-
-        props.expenses.map(expense => {
-            let amount = expense.amount
-            let by = expense.by_whom
-            let to = expense.to_whom.filter(to => to.isChecked === true)
-            let share = amount/to.length
-
-            to.forEach(element => {
-                let found = expensesOfEachMembers.findIndex(foo => foo.member === element.name)
-                expensesOfEachMembers[found].splittedExp.push({to: by, amount: share})
-            })
-        })
+    const final = () => {
+        return (
+            <div className="blocks">
+                <h6>Splitted Expenses</h6>
+                {
+                    props.splitted.forEach((firstItem, firstIndex) => {
+                        return (
+                            <div key={firstIndex}>
+                                {
+                                    firstItem.splittedExp.forEach((secondItem, secondIndex) => {
+                                        return (
+                                            <div key={secondIndex}>
+                                                <span>{firstItem.member }</span><span>{secondItem.amount}</span><span>{secondItem.to}</span>
+                                            </div>
+                                        )
+                                    })                                   
+                                }
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
     }
 
-    if (IsFirstCardUp && IsSecondCardUp && IsThirdCardUp) {
+    if (IsFirstCardUp && IsSecondCardUp && IsThirdCardUp && !IsFinalCardUp) {
         return (
             <Card className="infoCard">
                 {first()}
@@ -118,7 +123,7 @@ const InfoCard = (props) => {
             </Card>
         )
     }
-    else if (IsFirstCardUp && IsSecondCardUp && !IsThirdCardUp) {
+    else if (IsFirstCardUp && IsSecondCardUp && !IsThirdCardUp && !IsFinalCardUp) {
       return (
             <Card className="infoCard">
                 {first()}
@@ -129,7 +134,7 @@ const InfoCard = (props) => {
             </Card>
         )
     }
-    else if (IsFirstCardUp && !IsSecondCardUp && !IsThirdCardUp) {
+    else if (IsFirstCardUp && !IsSecondCardUp && !IsThirdCardUp && !IsFinalCardUp) {
         return (
             <Card className="infoCard">
                 {first()}
@@ -138,7 +143,18 @@ const InfoCard = (props) => {
             </Card>
         )
     }
-    else if (!IsFirstCardUp && !IsSecondCardUp && !IsThirdCardUp) {
+    else if (IsFirstCardUp && IsSecondCardUp && IsThirdCardUp && IsFinalCardUp) {
+        return (
+            <Card className="infoCard">
+                {first()}
+                <hr/>
+                {second()}
+                <hr/>
+                {final()}
+            </Card>
+        )
+    }    
+    else if (!IsFirstCardUp && !IsSecondCardUp && !IsThirdCardUp && !IsFinalCardUp) {
         return (
             <Card className="infoCard">
                 {allEmpty()}

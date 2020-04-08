@@ -47,7 +47,7 @@ const ExpenseForm = (props) => {
                 <Col>
                     <Card>
                         <center><h4 className="three">3</h4></center>
-                        <Form.Control onChange={props.handleAmount} value={props.amount || ""} placeholder="Amount" required/>
+                        <Form.Control onChange={props.handleAmount} value={props.amount || ""} placeholder="Amount" />
                         <Row style={{color: "#003B73", fontWeight: 600}}>By whom</Row> 
                         <Row>
                         {
@@ -64,10 +64,10 @@ const ExpenseForm = (props) => {
                         <Row style={{color: "#003B73", fontWeight: 600}}>To whom</Row>
                         <Row>
                         {
-                            props.members.map((member,index) => {
+                            props.to_whom.map((member,index) => {
                                 return(
                                     <Col key={index}>
-                                        <Form.Check type="checkbox" value={member.name || ""} label={member.name} 
+                                        <Form.Check type="checkbox" value={member.name || ""} label={member.name} checked={member.isChecked} 
                                             onChange={(event) => props.handleCheckbox(event, index)}/>
                                     </Col>
                                 )

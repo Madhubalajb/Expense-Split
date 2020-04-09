@@ -199,7 +199,7 @@ const Home = () => {
      }
   
     const splitExpenses = () => {
-      calculateExpense(newExpense.expenses)
+      calculateExpense(expenses)
       const newExpense = {
         expense_name: expName,
         date: date,

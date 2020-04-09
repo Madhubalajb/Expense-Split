@@ -198,29 +198,26 @@ const Home = () => {
       calculateFurther(expensesOfEachMembers)        
      }
   
-    const splitExpenses = (event) => {
-      event.preventDefault()
+    const splitExpenses = () => {
       const newExpense = {
         expense_name: expName,
         date: date,
         members: members,
-        expenses: expenses
+        expenses: expenses,
+        splitted: splitted
       }
-      if(newExpense.expense_name !== '' && newExpense.date !== '' && newExpense.members.length !== 0 && newExpense.expenses.length !== 0) {          
+      if(newExpense.expense_name !== '' && newExpense.date !== '' && newExpense.members.length !== 0 && newExpense.expenses.length !== 0) { 
         expenseService.addData(newExpense)
         .then(returnedExpense => {
           calculateExpense(newExpense.expenses)
-          handleFinal()  
-          makeNullAll() 
+          handleFinal() 
         })
         .catch(error => {
           showMessage(<div id="snackbar">Validation failed, Please verify expense details.</div>)
-          makeNullAll()
         })
       }
       else {
         showMessage(<div id="snackbar">Please enter all the details</div>)
-        makeNullAll()
       }
     } 
 

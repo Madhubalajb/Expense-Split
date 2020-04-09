@@ -11,15 +11,22 @@ const ExpenseForm = (props) => {
         handleSelectedRadio(event)
     }
 
+    const splitExpenses = (event) => {
+        event.preventDefault()
+        props.splitExpenses()
+        setSelectedRadio('')
+        document.getElementById("expenseForm").reset()
+    }
+
  return (
     <Container className="split">
-        <Form onSubmit={props.splitExpenses} >
+        <Form onSubmit={splitExpenses} id="expenseForm">
             <Row>
                 <Col>
                     <Card>
                         <center><h4 className="one">1</h4></center>
-                        <Form.Control onChange={props.handleExpName} value={props.expName || ""} placeholder="C'mon Name it" required/>
-                        <Form.Control onChange={props.handleDate} value={props.date} type="date" required/>
+                        <Form.Control onChange={props.handleExpName} placeholder="C'mon Name it" required/>
+                        <Form.Control onChange={props.handleDate} type="date" required/>
                         <center><Button title="Name your thing" onClick={props.handleFirst}>Name your thing</Button></center>
                     </Card>
                 </Col>
@@ -31,7 +38,7 @@ const ExpenseForm = (props) => {
                             props.members.map((member,index) => {
                                 return (
                                     <div className="addPerson" key={index}>
-                                        <Form.Control value={member.name || ""} placeholder="Person Name" onChange={(event) => props.handleMember(event, index)} />
+                                        <Form.Control placeholder="Person Name" onChange={(event) => props.handleMember(event, index)} />
                                         <i className="material-icons minusBtn" title="delete member" onClick={() => props.removeMember(index)}>delete</i>
                                     </div>
                                 )
@@ -47,14 +54,14 @@ const ExpenseForm = (props) => {
                 <Col>
                     <Card>
                         <center><h4 className="three">3</h4></center>
-                        <Form.Control onChange={props.handleAmount} value={props.amount || ""} placeholder="Amount" />
+                        <Form.Control onChange={props.handleAmount} placeholder="Amount" />
                         <Row style={{color: "#003B73", fontWeight: 600}}>By whom</Row> 
                         <Row>
                         {
                             props.members.map((member,index) => {
                                 return(
                                     <Col key={index}>
-                                        <Form.Check type="radio" checked={selectedRadio === member.name} value={member.name || ""} 
+                                        <Form.Check type="radio" checked={selectedRadio === member.name} value={member.name || ''}
                                         label={member.name} onChange={(event) => handleRadio(event)} />
                                     </Col>
                                 )
@@ -67,8 +74,8 @@ const ExpenseForm = (props) => {
                             props.to_whom.map((member,index) => {
                                 return(
                                     <Col key={index}>
-                                        <Form.Check type="checkbox" value={member.name || ""} label={member.name} checked={member.isChecked} 
-                                            onChange={(event) => props.handleCheckbox(event, index)}/>
+                                        <Form.Check type="checkbox" label={member.name} checked={member.isChecked} value={member.name || ''}
+                                            onChange={(event) => props.handleCheckbox(event, index)} />
                                     </Col>
                                 )
                             })

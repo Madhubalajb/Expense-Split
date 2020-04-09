@@ -103,7 +103,7 @@ const DisplayExpense = () => {
         })
    
     return (
-        <Container>
+        <Container fluid>
             <Notification msg={message} />
             <Row className="row-cols-4">
                 {showExpense()}  

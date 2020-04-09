@@ -186,7 +186,7 @@ const Home = () => {
         let amount = expense.amount
         let by = expense.by_whom
         let to = expense.to_whom.filter(to => to.isChecked === true)
-        let share = Math.round(amount/to.length)
+        let share = Math.round((amount/to.length) * 10 / 10)
         
         to.forEach(element => {
           let found = expensesOfEachMembers.findIndex(foo => (foo.member === element.name && foo.member !== by))
@@ -199,6 +199,7 @@ const Home = () => {
      }
   
     const splitExpenses = () => {
+      calculateExpense(newExpense.expenses)
       const newExpense = {
         expense_name: expName,
         date: date,
@@ -209,7 +210,6 @@ const Home = () => {
       if(newExpense.expense_name !== '' && newExpense.date !== '' && newExpense.members.length !== 0 && newExpense.expenses.length !== 0) { 
         expenseService.addData(newExpense)
         .then(returnedExpense => {
-          calculateExpense(newExpense.expenses)
           handleFinal() 
         })
         .catch(error => {

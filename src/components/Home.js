@@ -126,6 +126,7 @@ const Home = () => {
     }
 
     const addExpenseToInfoCard = () => {
+      calculateExpense(expenses)
       if(isExpenseAdded) {
         handleThird()
         setExpenseAdded(false)
@@ -199,7 +200,6 @@ const Home = () => {
      }
   
     const splitExpenses = () => {
-      calculateExpense(expenses)
       const newExpense = {
         expense_name: expName,
         date: date,
@@ -207,7 +207,8 @@ const Home = () => {
         expenses: expenses,
         splitted: splitted
       }
-      if(newExpense.expense_name !== '' && newExpense.date !== '' && newExpense.members.length !== 0 && newExpense.expenses.length !== 0) { 
+      if(newExpense.expense_name !== '' && newExpense.date !== '' && newExpense.members.length !== 0 && newExpense.expenses.length !== 0 &&
+        newExpense.splitted.length !== 0) { 
         expenseService.addData(newExpense)
         .then(returnedExpense => {
           handleFinal() 

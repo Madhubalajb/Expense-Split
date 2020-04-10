@@ -125,22 +125,18 @@ const Home = () => {
         handleModalUp()
     }
 
-    const addExpenseToInfoCard = async () => {
-      await calculateExpense(expenses)
-      .then (done => {
-        if(isExpenseAdded) {
-          handleThird()
-          setExpenseAdded(false)
-        }
-        else {
-          addExpense()
-          handleThird()
-          setExpenseAdded(false)
-        }
-      })
-      .catch (error => {
-        showMessage(<div id="snackbar">Couldn't split expense</div>)
-      })
+    const addExpenseToInfoCard = () => {
+      if(isExpenseAdded) {
+        calculateExpense(expenses)
+        handleThird()
+        setExpenseAdded(false)
+      }
+      else {
+        addExpense()
+        calculateExpense(expenses)
+        handleThird()
+        setExpenseAdded(false)
+      }
     }
     
     const calculateFurther = (expensesOfEachMembers) => {
@@ -181,8 +177,7 @@ const Home = () => {
         })
       })
       expensesOfEachMembers = expensesOfEachMembers.filter(element => element.splittedExp.length !== 0)
-      setSplitted(expensesOfEachMembers)
-      return 1    
+      setSplitted(expensesOfEachMembers)   
     }
 
     const calculateExpense = (expenses) => {
@@ -202,8 +197,7 @@ const Home = () => {
           }
         })
       })
-      calculateFurther(expensesOfEachMembers)  
-      return 1       
+      calculateFurther(expensesOfEachMembers)       
      }
   
     const splitExpenses = () => {

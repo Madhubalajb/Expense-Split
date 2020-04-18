@@ -15,13 +15,13 @@ const Home = () => {
     const [to_whom, setTo] = useState([{name: null, isChecked: false}, {name: null, isChecked: false}])
     const [members, setMembers] = useState([{name: null}, {name: null}])
     const [expenses, setExpenses] = useState([])
+    const [splitted, setSplitted] = useState([])  
     const [firstCard, setFirst] = useState(false)
     const [secondCard, setSecond] = useState(false)
     const [thirdCard, setThird] = useState(false)
     const [finalCard, setFinal] = useState(false)
     const [newExpModal, setModalUp] = useState(false) 
-    const [isExpenseAdded, setExpenseAdded] = useState(false) 
-    const [splitted, setSplitted] = useState([])     
+    const [isExpenseAdded, setExpenseAdded] = useState(false)      
 
     const handleFirst = () => setFirst(true)
     const handleSecond = () => setSecond(true)
@@ -125,21 +125,39 @@ const Home = () => {
         handleModalUp()
     }
 
-    const addExpenseToInfoCard = () => {
+    const addExpenseToInfoCard = async () => {
       if(isExpenseAdded) {
-        calculateExpense(expenses)
         handleThird()
         setExpenseAdded(false)
       }
       else {
         addExpense()
-        calculateExpense(expenses)
         handleThird()
         setExpenseAdded(false)
       }
+      const splittedExp = await calculateExpense()
+      setSplitted(splittedExp)
     }
-    
-    const calculateFurther = (expensesOfEachMembers) => {
+
+    const calculateExpense = new Promise((resolve, reject) => {
+      let expensesOfEachMembers = members.map(memb => {
+        return { member: memb.name, splittedExp: [] }
+      }) 
+
+      expenses.map(expense => {
+        let amount = expense.amount
+        let by = expense.by_whom
+        let to = expense.to_whom.filter(to => to.isChecked === true)
+        let share = (amount/to.length).toFixed(2)
+        
+        to.forEach(element => {
+          let found = expensesOfEachMembers.findIndex(foo => (foo.member === element.name && foo.member !== by))
+          if (found !== -1) {
+            expensesOfEachMembers[found].splittedExp.push({to: by, amount: share})
+          }
+        })
+      })
+
       expensesOfEachMembers.forEach((item, firstIndex) => {
         let person1 = { name: item.member, amtToGive: 0 }
         let person2 = { name: null,amtToGive: 0 }
@@ -177,28 +195,8 @@ const Home = () => {
         })
       })
       expensesOfEachMembers = expensesOfEachMembers.filter(element => element.splittedExp.length !== 0)
-      setSplitted(expensesOfEachMembers)   
-    }
-
-    const calculateExpense = (expenses) => {
-      const expensesOfEachMembers = members.map(memb => {
-        return { member: memb.name, splittedExp: [] }
-      }) 
-      expenses.map(expense => {
-        let amount = expense.amount
-        let by = expense.by_whom
-        let to = expense.to_whom.filter(to => to.isChecked === true)
-        let share = Math.round((amount/to.length) * 10 / 10)
-        
-        to.forEach(element => {
-          let found = expensesOfEachMembers.findIndex(foo => (foo.member === element.name && foo.member !== by))
-          if (found !== -1) {
-            expensesOfEachMembers[found].splittedExp.push({to: by, amount: share})
-          }
-        })
-      })
-      calculateFurther(expensesOfEachMembers)       
-     }
+      resolve(expensesOfEachMembers)
+     })
   
     const splitExpenses = () => {
       const newExpense = {

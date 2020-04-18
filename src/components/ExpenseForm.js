@@ -84,7 +84,7 @@ const ExpenseForm = (props) => {
                         <center>
                             <i className="material-icons addBtn" title="add more expense" onClick={(event) => props.addExpenseModal(event)}>add_circle</i>
                         </center>
-                        <center><Button title="add the expenses" onClick={props.addExpenseToInfoCard}>Add the expenses</Button></center>
+                        <center><Button title="add the expenses" onClick={() => props.addExpenseToInfoCard()}>Add the expenses</Button></center>
                     </Card>
                 </Col>
             </Row>

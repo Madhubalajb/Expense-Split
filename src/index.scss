@@ -202,6 +202,8 @@ body {
     .split {
         padding-top: 80px;
         .card {
+            box-shadow: 0 0 8px 0 rgba(17, 22, 26, 0.16), 0 4px 8px 0 rgba(17, 22, 26, 0.08), 0 8px 16px 0 rgba(17, 22, 26, 0.08);
+            border: none;
             background-color: $Pale-Blue;
             padding: 10px 30px;
             width: fit-content;
@@ -237,10 +239,11 @@ body {
             }
         }
         .split_btn {
+            box-shadow: 0 0 8px 0 rgba(17, 22, 26, 0.16), 0 4px 8px 0 rgba(17, 22, 26, 0.08), 0 8px 16px 0 rgba(17, 22, 26, 0.08);
             margin: 30px;
             font-weight: 600;
-            background-color: Blue;
-            border-color: Blue;
+            background-color: #1e2032;
+            color: #BBDEFB;
         }
     }
     .addPerson {

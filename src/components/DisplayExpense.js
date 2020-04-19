@@ -22,8 +22,11 @@ const DisplayExpense = () => {
         }, 3000)
     }
 
-    const handleEditExpense = () => {
-        let hi
+    const handleEditExpense = (expense) => {
+        let check = window.confirm('Wanna Edit?')
+        if(check) {
+
+        }
     }
 
     const handleRemoveExpense = async (expense) => {
@@ -48,7 +51,7 @@ const DisplayExpense = () => {
                             <div className="flexDisplay">
                                 <h4>{expense.expense_name}</h4>
                                 <span className="tools">
-                                    <i className="material-icons edit" title="Edit" onClick={handleEditExpense}>edit</i>
+                                    <i className="material-icons edit" title="Edit" onClick={() => handleEditExpense(expense)}>edit</i>
                                     <i className="material-icons delete" title="delete" onClick={() => handleRemoveExpense(expense)}>delete</i>
                                 </span>
                             </div>
@@ -76,7 +79,7 @@ const DisplayExpense = () => {
                                 expense.expenses.map((expense, index) => {
                                     let to = expense.to_whom.filter(to => to.isChecked === true)
                                     return (
-                                        <div key={index}>
+                                        <div key={index} style={{marginBottom: "10px"}}>
                                             <div className="flexDisplay">
                                                 <i className="material-icons white">navigate_next</i>
                                                 <span className="white">Amount</span>

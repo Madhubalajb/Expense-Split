@@ -67,7 +67,7 @@ const InfoCard = (props) => {
                             <div className="blocks" key={index}>
                                 <div className="flexDisplay">
                                     <i className="material-icons white">navigate_next</i>
-                                    <span className="white">Amount -</span>
+                                    <span className="white">Amount</span>
                                     <span>{expense.amount}</span>
                                 </div> 
                                 <div>
@@ -167,7 +167,7 @@ const InfoCard = (props) => {
             </Card>
         )
     }    
-    else if (!IsFirstCardUp && !IsSecondCardUp && !IsThirdCardUp && !IsFinalCardUp) {
+    else {
         return (
             <Card className="infoCard">
                 {allEmpty()}

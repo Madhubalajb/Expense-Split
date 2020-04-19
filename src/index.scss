@@ -30,6 +30,7 @@ body {
     }
     .infoCard {
         background-color: $infoCard-Blue;
+        box-shadow: 0 0 8px 0 rgba(17, 22, 26, 0.16), 0 4px 8px 0 rgba(17, 22, 26, 0.08), 0 8px 16px 0 rgba(17, 22, 26, 0.08);
         height: fit-content;
         margin: 70px 20px;
         padding: 10px 10px;
@@ -87,6 +88,7 @@ body {
         }
     }
     .btn {
+        box-shadow: 0 0 8px 0 rgba(17, 22, 26, 0.16), 0 4px 8px 0 rgba(17, 22, 26, 0.08), 0 8px 16px 0 rgba(17, 22, 26, 0.08);
         width: fit-content;
         background-color: $Navy-Blue;
         border-color: $Navy-Blue;
@@ -239,7 +241,6 @@ body {
             }
         }
         .split_btn {
-            box-shadow: 0 0 8px 0 rgba(17, 22, 26, 0.16), 0 4px 8px 0 rgba(17, 22, 26, 0.08), 0 8px 16px 0 rgba(17, 22, 26, 0.08);
             margin: 30px;
             font-weight: 600;
             background-color: #1e2032;

@@ -23,8 +23,14 @@ const Home = () => {
     const [newExpModal, setModalUp] = useState(false) 
     const [isExpenseAdded, setExpenseAdded] = useState(false)      
 
-    const handleFirst = () => setFirst(true)
-    const handleSecond = () => setSecond(true)
+    const handleFirst = (event) => {
+      event.preventDefault()
+      setFirst(true)
+    }
+    const handleSecond = (event) => {
+      event.preventDefault()
+      setSecond(true)
+    }
     const handleThird = () => setThird(true)
     const handleFinal = () => setFinal(true)
     const handleModalUp = () => setModalUp(true)
@@ -114,7 +120,7 @@ const Home = () => {
       else {
         showMessage(<div id="snackbar">Please enter all the Expense details</div>)
       }
-    }
+    } 
 
     const addExpenseModal = (event) => {
       event.preventDefault()
@@ -125,7 +131,8 @@ const Home = () => {
         handleModalUp()
     }
 
-    const addExpenseToInfoCard = async () => {
+    const addExpenseToInfoCard = (event) => {
+      event.preventDefault()
       if(isExpenseAdded) {
         handleThird()
         setExpenseAdded(false)
@@ -133,92 +140,95 @@ const Home = () => {
       else {
         addExpense()
         handleThird()
-        setExpenseAdded(false)
+        setExpenseAdded(false)          
       }
-      const splittedExp = await calculateExpense()
-      setSplitted(splittedExp)
     }
 
-    const calculateExpense = new Promise((resolve, reject) => {
-      let expensesOfEachMembers = members.map(memb => {
-        return { member: memb.name, splittedExp: [] }
-      }) 
-
-      expenses.map(expense => {
-        let amount = expense.amount
-        let by = expense.by_whom
-        let to = expense.to_whom.filter(to => to.isChecked === true)
-        let share = (amount/to.length).toFixed(2)
-        
-        to.forEach(element => {
-          let found = expensesOfEachMembers.findIndex(foo => (foo.member === element.name && foo.member !== by))
-          if (found !== -1) {
-            expensesOfEachMembers[found].splittedExp.push({to: by, amount: share})
-          }
-        })
-      })
-
-      expensesOfEachMembers.forEach((item, firstIndex) => {
-        let person1 = { name: item.member, amtToGive: 0 }
-        let person2 = { name: null,amtToGive: 0 }
-        let found 
-        let found1
-
-        item.splittedExp.forEach((item, secondIndex) => {
-          person2.name = item.to
-          person1.amtToGive = item.amount
-          found = expensesOfEachMembers.findIndex(item => item.member === person2.name) 
+    function calculateExpense() {
+      return new Promise((resolve, reject) => {
+        let expensesOfEachMembers = members.map(memb => {
+          return { member: memb.name, splittedExp: [] }
+        }) 
+  
+        expenses.map(expense => {
+          let amount = expense.amount
+          let by = expense.by_whom
+          let to = expense.to_whom.filter(to => to.isChecked === true)
+          let share = (amount/to.length).toFixed(2)
           
-          if(found !== -1) {
-            found1 = expensesOfEachMembers[found].splittedExp.findIndex(item => item.to === person1.name)
-            if(found1 !== -1) {
-              person2.amtToGive = expensesOfEachMembers[found].splittedExp[found1].amount
+          to.forEach(element => {
+            let found = expensesOfEachMembers.findIndex(foo => (foo.member === element.name && foo.member !== by))
+            if (found !== -1) {
+              expensesOfEachMembers[found].splittedExp.push({to: by, amount: share})
             }
-          }
-          
-          if(person2.amtToGive !== 0 && person1.amtToGive >= person2.amtToGive) {
-            let share = person1.amtToGive - person2.amtToGive
-            if(share === 0) {
+          })
+        })
+  
+        expensesOfEachMembers.forEach((item, firstIndex) => {
+          let person1 = { name: item.member, amtToGive: 0 }
+          let person2 = { name: null,amtToGive: 0 }
+          let found 
+          let found1
+  
+          item.splittedExp.forEach((item, secondIndex) => {
+            person2.name = item.to
+            person1.amtToGive = item.amount
+            found = expensesOfEachMembers.findIndex(item => item.member === person2.name) 
+            
+            if(found !== -1) {
+              found1 = expensesOfEachMembers[found].splittedExp.findIndex(item => item.to === person1.name)
+              if(found1 !== -1) {
+                person2.amtToGive = expensesOfEachMembers[found].splittedExp[found1].amount
+              }
+            }
+            
+            if(person2.amtToGive !== 0 && person1.amtToGive >= person2.amtToGive) {
+              let share = person1.amtToGive - person2.amtToGive
+              if(share === 0) {
+                expensesOfEachMembers[firstIndex].splittedExp.splice(secondIndex, 1)
+                expensesOfEachMembers[found].splittedExp.splice(found1, 1)
+              }
+              else {
+                expensesOfEachMembers[firstIndex].splittedExp[secondIndex].amount = Math.abs(share)
+                expensesOfEachMembers[found].splittedExp.splice(found1, 1)
+              }
+            }
+            else if(person2.amtToGive !== 0 && person1.amtToGive < person2.amtToGive) {
+              let share = person2.amtToGive - person1.amtToGive
               expensesOfEachMembers[firstIndex].splittedExp.splice(secondIndex, 1)
-              expensesOfEachMembers[found].splittedExp.splice(found1, 1)
+              expensesOfEachMembers[found].splittedExp[found1].amount = Math.abs(share)
             }
-            else {
-              expensesOfEachMembers[firstIndex].splittedExp[secondIndex].amount = Math.abs(share)
-              expensesOfEachMembers[found].splittedExp.splice(found1, 1)
-            }
-          }
-          else if(person2.amtToGive !== 0 && person1.amtToGive < person2.amtToGive) {
-            let share = person2.amtToGive - person1.amtToGive
-            expensesOfEachMembers[firstIndex].splittedExp.splice(secondIndex, 1)
-            expensesOfEachMembers[found].splittedExp[found1].amount = Math.abs(share)
-          }
+          })
         })
+        expensesOfEachMembers = expensesOfEachMembers.filter(element => element.splittedExp.length !== 0)
+        setSplitted(expensesOfEachMembers)
+        resolve(expensesOfEachMembers)
       })
-      expensesOfEachMembers = expensesOfEachMembers.filter(element => element.splittedExp.length !== 0)
-      resolve(expensesOfEachMembers)
-     })
+    } 
   
     const splitExpenses = () => {
-      const newExpense = {
-        expense_name: expName,
-        date: date,
-        members: members,
-        expenses: expenses,
-        splitted: splitted
-      }
-      if(newExpense.expense_name !== '' && newExpense.date !== '' && newExpense.members.length !== 0 && newExpense.expenses.length !== 0 &&
-        newExpense.splitted.length !== 0) { 
-        expenseService.addData(newExpense)
-        .then(returnedExpense => {
-          handleFinal() 
-        })
-        .catch(error => {
-          showMessage(<div id="snackbar">Validation failed, Please verify expense details.</div>)
-        })
-      }
-      else {
-        showMessage(<div id="snackbar">Please enter all the details</div>)
-      }
+      calculateExpense().then(data => {
+        const newExpense = {
+          expense_name: expName,
+          date: date,
+          members: members,
+          expenses: expenses,
+          splitted: data
+        }
+        if(newExpense.expense_name !== '' && newExpense.date !== '' && newExpense.members.length !== 0 && newExpense.expenses.length !== 0 &&
+          newExpense.splitted.length !== 0) { 
+          expenseService.addData(newExpense)
+          .then(returnedExpense => {
+            handleFinal() 
+          })
+          .catch(error => {
+            showMessage(<div id="snackbar">Validation failed, Please verify expense details.</div>)
+          })
+        }
+        else {
+          showMessage(<div id="snackbar">Please enter all the details</div>)
+        }
+      })
     } 
 
     return (

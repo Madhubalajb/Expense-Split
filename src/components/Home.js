@@ -154,13 +154,7 @@ const Home = () => {
           let amount = expense.amount
           let by = expense.by_whom
           let to = expense.to_whom.filter(to => to.isChecked === true)
-          let share
-          if(amount % to.length === 0)
-            share = amount / to.length
-          else if(amount % to.length === 1)
-            share = (amount / to.length).toFixed(2)
-          else
-            share = Math.floor(amount / to.length)
+          let share = (to.length === 2) ? (amount / to.length).toFixed(2) : Math.floor(amount / to.length)
           
           to.forEach(element => {
             let found = expensesOfEachMembers.findIndex(foo => (foo.member === element.name && foo.member !== by))

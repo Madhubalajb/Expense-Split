@@ -219,7 +219,10 @@ const Home = () => {
           newExpense.splitted.length !== 0) { 
           expenseService.addData(newExpense)
           .then(returnedExpense => {
-            handleFinal() 
+            handleFinal()
+            setTimeout(() => {
+              makeNullAll()
+            }, 5000) 
           })
           .catch(error => {
             showMessage(<div id="snackbar">Validation failed, Please verify expense details.</div>)

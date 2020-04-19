@@ -59,11 +59,15 @@ body {
             margin: 10px;
             border-top: 1px solid #03A9F4;
         }
-        h4, h6, .white{
-            color: #03A9F4;
+        .white{
+            color: white;
         }
         h4 {
             padding: 0px 5px;
+            color: #03A9F4;
+        }
+        h6 {
+            color: #03A9F4;
         }
         .edit, .delete {
             cursor: pointer;

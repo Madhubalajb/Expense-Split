@@ -25,7 +25,7 @@ const DisplayExpense = () => {
     const handleEditExpense = (expense) => {
         let check = window.confirm('Wanna Edit?')
         if(check) {
-
+            console.log('...')
         }
     }
 

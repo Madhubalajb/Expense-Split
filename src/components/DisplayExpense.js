@@ -86,7 +86,7 @@ const DisplayExpense = () => {
                                                 <span className="white">By</span> 
                                                 <span>{expense.by_whom}</span>
                                             </div>
-                                            <div>
+                                            <div style={{width: "max-content"}}>
                                                 <span className="white">To</span> 
                                                 {
                                                     to.map((to, index) => <span key={index}>{to.name}</span>)

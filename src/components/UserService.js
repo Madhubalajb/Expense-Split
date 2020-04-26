@@ -100,7 +100,9 @@ const UserService = () => {
     
                 <Nav.Link onClick={handleSignupModal}><b>Sign <span className="foo">Up</span></b></Nav.Link>
                 <SignupModal show={signupModal} Close={handleSignupNoModal} name={handleName} username={handleUsername} pwd={handlePassword} 
-                signup={handleSignup}/>              
+                signup={handleSignup}/>    
+
+                <Nav.Link><Link to="/about"><b>about</b></Link></Nav.Link>          
             </div>
         )
     }
@@ -110,6 +112,7 @@ const UserService = () => {
                 <Notification msg={message} />
                 <Nav.Link><Link to="/user"><b>{user.name}</b></Link></Nav.Link>
                 <Nav.Link onClick={logout}><b>Logout</b></Nav.Link>
+                <Nav.Link><Link to="/about"><b>about</b></Link></Nav.Link>  
             </div>
         )
     }

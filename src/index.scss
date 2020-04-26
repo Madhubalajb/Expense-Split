@@ -266,3 +266,55 @@ body {
         }
     }
 }
+
+@media screen and (max-width: 426px) {
+    .body {
+        .navbar-light {
+            .navbar-nav {
+                .nav-link {
+                    display: block;
+                }
+            }
+        }
+        .split {
+            padding-top: 8px;
+            .card {
+                margin-bottom: 25px;
+            }
+        }
+        .infoCard {
+            margin: 15px auto;
+            .blocks {
+                margin: 0px 10px;
+            }
+        }
+        .logos {
+            margin-top: 15px;
+            .plus {
+                margin: 0 10px;
+            }
+            .react {
+                img {
+                    width: 60px;
+                }
+            }
+            .node {
+                img {
+                    width: 100px;
+                }
+            }
+            .mongodb {
+                img {
+                    width: 35px;
+                }
+            }
+        }
+        .stack {
+            margin-top: 20px;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 1rem;
+        }
+    }
+}

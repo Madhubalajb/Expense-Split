@@ -1,6 +1,6 @@
 # Expense Split
 
-> A React based web application for splitting expenses spent (**WIP**)
+> A React based web application for splitting expenses spent (https://expense-split1.herokuapp.com)
 
 ## Tech Stack
 **Front End**
@@ -9,7 +9,7 @@
 - Bootstrap
 - React JS
 
-**Back End**
+**Back End** <br />
 Code for Back End (https://github.com/Madhubalajb/Expense-Split-BackEnd)
 - Node JS
 - Express

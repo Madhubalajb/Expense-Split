@@ -129,14 +129,23 @@ const DisplayExpense = () => {
                 )
         })
    
-    return (
-        <Container fluid>
-            <Notification msg={message} />
-            <Row>
-                {showExpense()}  
-            </Row>
-        </Container>
-    )
+    if (expenses.length === 0) {
+        return (
+            <center>
+                <p>No records to display!</p>
+            </center>
+        )
+    }
+    else {
+        return (
+            <Container fluid>
+                <Notification msg={message} />
+                <Row>
+                    {showExpense()}  
+                </Row>
+            </Container>
+        )
+    }
 }
 
 export default DisplayExpense

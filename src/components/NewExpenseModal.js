@@ -28,7 +28,7 @@ const NewExpenseModal = (props) => {
                                         label={member.name} onChange={(event) => handleRadio(event)} />
                                 </Col>
                             )
-                        })
+                        })  
                     }
                     </Row>
 

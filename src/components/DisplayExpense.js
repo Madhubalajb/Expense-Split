@@ -22,12 +22,12 @@ const DisplayExpense = () => {
         }, 3000)
     }
 
-    const handleEditExpense = (expense) => {
-        let check = window.confirm('Wanna Edit?')
-        if(check) {
-            console.log('...')
-        }
-    }
+    // const handleEditExpense = (expense) => {
+    //     let check = window.confirm('Wanna Edit?')
+    //     if(check) {
+    //         console.log('...')
+    //     }
+    // }
 
     const handleRemoveExpense = async (expense) => {
         let check = window.confirm('Wanna delete?')
@@ -51,7 +51,7 @@ const DisplayExpense = () => {
                             <div className="flexDisplay">
                                 <h4>{expense.expense_name}</h4>
                                 <span className="tools">
-                                    <i className="material-icons edit" title="Edit" onClick={() => handleEditExpense(expense)}>edit</i>
+                                    {/* <i className="material-icons edit" title="Edit" onClick={() => handleEditExpense(expense)}>edit</i> */}
                                     <i className="material-icons delete" title="delete" onClick={() => handleRemoveExpense(expense)}>delete</i>
                                 </span>
                             </div>

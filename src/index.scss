@@ -278,9 +278,15 @@ body {
         }
         .split {
             padding-top: 8px;
+            position: relative;
+            top: 21%;
             .card {
                 margin-bottom: 25px;
             }
+        }
+        .infoCol {
+            position: relative;
+            top: -80%;
         }
         .infoCard {
             margin: 15px auto;

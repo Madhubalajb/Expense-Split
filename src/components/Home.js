@@ -250,7 +250,7 @@ const Home = () => {
                         handleSecond={handleSecond} handleThird={handleThird} addExpenseToInfoCard={addExpenseToInfoCard} />
               </Col>
 
-              <Col sm={3}>
+              <Col sm={3} className="infoCol">
                 <InfoCard expName={expName} date={date} members={members} expenses={expenses} firstCard={firstCard} 
                       secondCard={secondCard} thirdCard={thirdCard} finalCard={finalCard} splitted={splitted} />
               </Col>

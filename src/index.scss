@@ -279,17 +279,15 @@ body {
         .split {
             padding-top: 8px;
             position: relative;
-            top: 21%;
+            top: 27%;
             .card {
                 margin-bottom: 25px;
             }
         }
-        .infoCol {
-            position: relative;
-            top: -80%;
-        }
         .infoCard {
             margin: 15px auto;
+            position: relative;
+            bottom: 380%;
             .blocks {
                 margin: 0px 10px;
             }

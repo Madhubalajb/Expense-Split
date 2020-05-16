@@ -4,14 +4,14 @@
 
 ## Tech Stack
 **Front End**
+- React 
 - HTML
 - SASS
 - Bootstrap
-- React JS
 
 **Back End** <br />
 Code for Back End (https://github.com/Madhubalajb/Expense-Split-BackEnd)
-- Node JS
+- Node 
 - Express
 - MongoDB
 
@@ -27,7 +27,7 @@ npm install
 ```
 npm start
 ```
-## What I Used
+## What I have Used
 * [Sublime Text](https://www.sublimetext.com/3) - A light weight and sophisticated text editor
 * [SASS](https://sass-lang.com/) - The Syntactically AWESOME guy
 * [Google Fonts](https://fonts.google.com/) - Collection of beautiful fonts

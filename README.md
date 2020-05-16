@@ -9,7 +9,7 @@
 - SASS
 - Bootstrap
 
-**Back End** (https://github.com/Madhubalajb/Expense-Split-BackEnd)
+[**Back End**](https://github.com/Madhubalajb/Expense-Split-BackEnd)
 - Node 
 - Express
 - MongoDB

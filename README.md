@@ -2,7 +2,7 @@
 
 > A React based web application for splitting expenses spent 
 
-![Expense](expense.png)
+![Expense](expense.gif)
 
 ## Tech Stack
 **Front End**

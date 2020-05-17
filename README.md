@@ -33,4 +33,4 @@ npm start
 * [Webp Images](https://developers.google.com/speed/webp/) - Such a light-weight images
 
 
- <p align='center' style="color: #873b94"><b>Happy Coding :)</b></p>
+ <p align='center'><b>Happy Coding :)</b></p>

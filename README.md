@@ -2,6 +2,8 @@
 
 > A React based web application for splitting expenses spent 
 
+![Expense](expense.png)
+
 ## Tech Stack
 **Front End**
 - React 

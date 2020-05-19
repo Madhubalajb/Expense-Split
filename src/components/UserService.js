@@ -112,7 +112,6 @@ const UserService = () => {
                 <Notification msg={message} />
                 <Nav.Link><Link to="/user"><b>{user.name}</b></Link></Nav.Link>
                 <Nav.Link onClick={logout}><b>Logout</b></Nav.Link>
-                <Nav.Link><Link to="/about"><b>about</b></Link></Nav.Link>  
             </div>
         )
     }
